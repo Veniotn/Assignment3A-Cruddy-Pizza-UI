@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderConfirmation">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#302B2B"
+        android:shrinkColumns="1,2,3"
+        android:stretchColumns="1,2,3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/orderConfirmedTopRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/headerTextView"
+                android:layout_width="404dp"
+                android:layout_height="60dp"
+                android:gravity="bottom|left"
+                android:text="@string/orderConfirmedText"
+                android:textColor="#F3F3F3"
+                android:textSize="34sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/OrderIDLabelRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="30dp">
+
+            <TextView
+                android:id="@+id/orderIDLabelTextView"
+                android:layout_width="109dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_span="2"
+                android:text="@string/orderIdPromptText"
+                android:textColor="#EFEFEF"
+                android:textSize="18sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/orderIDRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/orderIDLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:text="@string/defaultOrderID"
+                android:textColor="#CE1F3C"
+                android:textSize="23sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/orderDateLabelRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/orderDateLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40dp"
+                android:text="@string/orderDatePromptText"
+                android:textColor="#EFEFEF"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/orderDateTextRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/orderDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:text="@string/defaultOrderDateText"
+                android:textColor="#CE1F3C"
+                android:textSize="23sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/pizzaSizePromptRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/pizzaSizePromptTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40dp"
+                android:text="@string/pizzaSizePromptText"
+                android:textColor="#EFEFEF"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/loginInputRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/orderIDTextView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:text="@string/sizeMediumText"
+                android:textColor="#CE1F3C"
+                android:textSize="23sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/toppingsLabelRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/toppingsPromptTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40dp"
+                android:text="@string/toppingsPromptText"
+                android:textColor="#EFEFEF"
+                android:textSize="18sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/orderIDTextView6"
+                android:layout_width="wrap_content"
+                android:layout_height="210dp"
+                android:paddingTop="20dp"
+                android:text="@string/pepperoniText"
+                android:textColor="#CE1F3C"
+                android:textSize="23sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/createAccountButtonRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/mainMenuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:backgroundTint="#CF1F3C"
+                android:gravity="center"
+                android:text="@string/mainMenuText"
+                android:textSize="22sp" />
+        </TableRow>
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

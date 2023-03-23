@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountCreation">
+
+    <TableLayout
+        android:id="@+id/tableLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#302B2B"
+        android:shrinkColumns="1,2,3"
+        android:stretchColumns="1,2,3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/createAccountTopRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/headerTextView"
+                android:layout_width="404dp"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:text="@string/createAccountScreenText"
+                android:textColor="#D01F3C"
+                android:textSize="34sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/firstNameTextRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="50dp">
+
+            <TextView
+                android:id="@+id/firstNamePromptTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/firstNameCreateText"
+                android:textColor="#EFEFEF"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/firstNameInputRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="#C2B4B4"
+                android:ems="10"
+                android:inputType="textPersonName" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/lastNameTextRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/lastNamePromptTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40dp"
+                android:text="@string/lastNameCreateText"
+                android:textColor="#EFEFEF"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/lastNameInputRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/editTextTextPersonName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#C2B4B4"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:paddingBottom="20dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/loginTextRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/loginPromptTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40dp"
+                android:text="@string/loginCreate"
+                android:textColor="#EFEFEF"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/loginInputRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/loginEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#C2B4B4"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:paddingBottom="20dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/createAccountButtonRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="133dp">
+
+            <Button
+                android:id="@+id/confirmOrderButton"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:backgroundTint="#CF1F3C"
+                android:gravity="center"
+                android:text="@string/createAccountText"
+                android:textSize="18sp" />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#CF1F3C"
+        android:text="@string/backText"
+        app:cornerRadius="30dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

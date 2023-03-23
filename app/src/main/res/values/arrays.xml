@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="sizeOptionsEnglish">
+        <item>@string/sizeSmallText</item>
+        <item>@string/sizeMediumText</item>
+        <item>@string/sizeLargeText</item>
+
+    </array>
+
+
+    <array name="toppingsEnglish">
+        <item>@string/pepperoniText</item>
+        <item>@string/sausageText</item>
+        <item>@string/baconText</item>
+        <item>@string/tomatoText</item>
+    </array>
+
+
+</resources>

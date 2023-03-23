@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/orderIDLabel"
+                android:layout_width="74dp"
+                android:layout_height="51dp"
+                android:gravity="center"
+                android:text="@string/orderIdPromptText"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/OrderIDTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/OrderIDTextView"
+                android:layout_width="27dp"
+                android:layout_height="49dp"
+                android:gravity="center"
+                android:text="@string/defaultOrderID"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/pizzaSizeLabel"
+                app:layout_constraintStart_toEndOf="@+id/orderIDLabel" />
+
+            <TextView
+                android:id="@+id/pizzaSizeLabel"
+                android:layout_width="75dp"
+                android:layout_height="51dp"
+                android:gravity="center"
+                android:text="@string/pizzaSizePromptText"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/pizzaSizeTextView"
+                app:layout_constraintStart_toEndOf="@+id/OrderIDTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/pizzaSizeTextView"
+                android:layout_width="48dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/medAbreviation"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/orderDateTextView"
+                app:layout_constraintStart_toEndOf="@+id/pizzaSizeLabel"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/orderDateLabel"
+                android:layout_width="109dp"
+                android:layout_height="51dp"
+                android:layout_marginEnd="2dp"
+                android:gravity="center"
+                android:text="@string/defaultOrderDateText"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/orderDateTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/orderDateTextView"
+                android:layout_width="74dp"
+                android:layout_height="51dp"
+                android:gravity="center"
+                android:text="@string/orderDatePromptText"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/orderDateLabel"
+                app:layout_constraintStart_toEndOf="@+id/pizzaSizeTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
