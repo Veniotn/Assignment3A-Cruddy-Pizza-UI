@@ -1,18 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <array name="loginScreenEnglish">
+        <item>@string/frenchLabel</item>
+        <item>@string/welcomeMessageEN</item>
+        <item>@string/loginTextEN</item>
+        <item>@string/loginButtonTextEN</item>
+        <item>@string/createAccountTextEN</item>
+        <item>@string/bottomCopyrightTextEN</item>
+    </array>
+    <array name="loginScreenFrench">
+        <item>@string/englishLabel</item>
+        <item>@string/welcomeMessageFR</item>
+        <item>@string/loginTextFR</item>
+        <item>@string/loginButtonTextFR</item>
+        <item>@string/createAccountTextFR</item>
+        <item>@string/bottomCopyrightTextFR</item>
+    </array>
+
+    <array name="mainMenuEnglish">
+        <item>@string/welcomeUserTextEN</item>
+        <item>@string/createOrderTextEN</item>
+        <item>@string/viewOrderTextEN</item>
+        <item>@string/logoutTextEN</item>
+    </array>
+    <array name="mainMenuFrench">
+        <item>@string/welcomeUserTextFR</item>
+        <item>@string/createOrderTextFR</item>
+        <item>@string/viewOrderTextFR</item>
+        <item>@string/logoutTextFR</item>
+    </array>
+
+    <array name="orderCreationEnglish">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
+    </array>
+    <array name="orderCreationFrench">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
+    </array>
+
     <array name="sizeOptionsEnglish">
-        <item>@string/sizeSmallText</item>
-        <item>@string/sizeMediumText</item>
-        <item>@string/sizeLargeText</item>
+        <item>@string/sizeSmallTextEN</item>
+        <item>@string/sizeMediumTextEN</item>
+        <item>@string/sizeLargeTextEN</item>
+    </array>
+    <array name="sizeOptionsFrench">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
+    </array>
+
+    <array name="toppingsEnglish">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
+    </array>
+    <array name="toppingsFrench">
 
     </array>
 
+    <array name="orderConfirmationEnglish">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
+    </array>
 
-    <array name="toppingsEnglish">
-        <item>@string/pepperoniText</item>
-        <item>@string/sausageText</item>
-        <item>@string/baconText</item>
-        <item>@string/tomatoText</item>
+    <array name="orderConfirmationFrench">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
+    </array>
+
+    <array name="orderHistoryEnglish">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
+    </array>
+
+    <array name="orderHistoryFrench">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
+    </array>
+
+    <array name="modifyOrderEnglish">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
+    </array>
+
+    <array name="modifyOrderFrench">
+        <item>@string/pepperoniTextEN</item>
+        <item>@string/sausageTextEN</item>
+        <item>@string/baconTextEN</item>
+        <item>@string/tomatoTextEN</item>
     </array>
 
 

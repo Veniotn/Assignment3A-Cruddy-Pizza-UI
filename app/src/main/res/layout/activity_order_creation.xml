@@ -24,7 +24,7 @@
                 android:layout_width="404dp"
                 android:layout_height="150dp"
                 android:gravity="center"
-                android:text="@string/makePizzaText"
+                android:text="@string/makePizzaTextEN"
                 android:textColor="#D01F3C"
                 android:textSize="34sp" />
         </TableRow>
@@ -38,7 +38,7 @@
                 android:id="@+id/sizePromptTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sizePromptText"
+                android:text="@string/sizePromptTextEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
         </TableRow>
@@ -54,7 +54,7 @@
                 android:layout_height="60dp"
                 android:background="#C1B3B3"
                 android:entries="@array/sizeOptionsEnglish"
-                android:prompt="@string/app_name"
+                android:prompt="@string/app_nameEN"
                 android:spinnerMode="dropdown" />
 
         </TableRow>
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
-                android:text="@string/toppingOnePrompt"
+                android:text="@string/toppingOnePromptEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
         </TableRow>
@@ -85,7 +85,7 @@
                 android:layout_height="60dp"
                 android:background="#C1B3B3"
                 android:entries="@array/toppingsEnglish"
-                android:prompt="@string/app_name"
+                android:prompt="@string/app_nameEN"
                 android:spinnerMode="dropdown" />
 
         </TableRow>
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
-                android:text="@string/toppingTwoPrompt"
+                android:text="@string/toppingTwoPromptEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
         </TableRow>
@@ -116,7 +116,7 @@
                 android:layout_height="60dp"
                 android:background="#C1B3B3"
                 android:entries="@array/toppingsEnglish"
-                android:prompt="@string/app_name"
+                android:prompt="@string/app_nameEN"
                 android:spinnerMode="dropdown" />
 
         </TableRow>
@@ -131,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
-                android:text="@string/toppingThreePrompt"
+                android:text="@string/toppingThreePromptEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
         </TableRow>
@@ -147,7 +147,7 @@
                 android:layout_height="60dp"
                 android:background="#C1B3B3"
                 android:entries="@array/toppingsEnglish"
-                android:prompt="@string/app_name"
+                android:prompt="@string/app_nameEN"
                 android:spinnerMode="dropdown" />
         </TableRow>
 
@@ -163,7 +163,7 @@
                 android:layout_height="110dp"
                 android:backgroundTint="#CF1F3C"
                 android:gravity="center"
-                android:text="@string/confirmOrderText"
+                android:text="@string/confirmOrderTextEN"
                 android:textSize="23sp" />
         </TableRow>
     </TableLayout>
@@ -173,7 +173,7 @@
         android:layout_width="117dp"
         android:layout_height="59dp"
         android:backgroundTint="#CE1F3C"
-        android:text="@string/backText"
+        android:text="@string/backTextEN"
         app:cornerRadius="30dp" />
 
     <Button
@@ -182,6 +182,6 @@
         android:layout_height="59dp"
         android:layout_marginStart="295dp"
         android:backgroundTint="#CF1F3C"
-        android:text="@string/frenchLabel"
+        android:text="@string/frenchLabelEN"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

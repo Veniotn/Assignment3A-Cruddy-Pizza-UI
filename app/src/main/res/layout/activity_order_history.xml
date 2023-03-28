@@ -29,7 +29,7 @@
                 android:layout_height="150dp"
                 android:layout_span="3"
                 android:gravity="center|start"
-                android:text="@string/orderHistoryText"
+                android:text="@string/orderHistoryTextEN"
                 android:textColor="#FFFFFF"
                 android:textSize="34sp" />
         </TableRow>
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="310dp"
         android:backgroundTint="#F44336"
-        android:text="@string/frenchLabel"
+        android:text="@string/frenchLabelEN"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

@@ -27,7 +27,7 @@
                 android:layout_width="404dp"
                 android:layout_height="60dp"
                 android:gravity="bottom|left"
-                android:text="@string/orderConfirmedText"
+                android:text="@string/orderConfirmedTextEN"
                 android:textColor="#F3F3F3"
                 android:textSize="34sp" />
         </TableRow>
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="0"
                 android:layout_span="2"
-                android:text="@string/orderIdPromptText"
+                android:text="@string/orderIdPromptTextEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
 
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:text="@string/defaultOrderID"
+                android:text="@string/defaultOrderIDEN"
                 android:textColor="#CE1F3C"
                 android:textSize="23sp" />
 
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
-                android:text="@string/orderDatePromptText"
+                android:text="@string/orderDatePromptTextEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
         </TableRow>
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:text="@string/defaultOrderDateText"
+                android:text="@string/defaultOrderDateTextEN"
                 android:textColor="#CE1F3C"
                 android:textSize="23sp" />
 
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
-                android:text="@string/pizzaSizePromptText"
+                android:text="@string/pizzaSizePromptTextEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
         </TableRow>
@@ -122,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:text="@string/sizeMediumText"
+                android:text="@string/sizeMediumTextEN"
                 android:textColor="#CE1F3C"
                 android:textSize="23sp" />
 
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
-                android:text="@string/toppingsPromptText"
+                android:text="@string/toppingsPromptTextEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
 
@@ -153,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="210dp"
                 android:paddingTop="20dp"
-                android:text="@string/pepperoniText"
+                android:text="@string/pepperoniTextEN"
                 android:textColor="#CE1F3C"
                 android:textSize="23sp" />
         </TableRow>
@@ -169,7 +169,7 @@
                 android:layout_height="90dp"
                 android:backgroundTint="#CF1F3C"
                 android:gravity="center"
-                android:text="@string/mainMenuText"
+                android:text="@string/mainMenuTextEN"
                 android:textSize="22sp" />
         </TableRow>
     </TableLayout>

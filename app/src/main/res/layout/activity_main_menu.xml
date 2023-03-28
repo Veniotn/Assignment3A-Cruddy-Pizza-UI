@@ -27,7 +27,7 @@
                 android:layout_height="200dp"
                 android:layout_column="0"
                 android:gravity="center"
-                android:text="@string/welcomeUserText"
+                android:text="@string/welcomeUserTextEN"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="32sp" />
@@ -45,9 +45,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
                 android:backgroundTint="#D11F3C"
-                android:text="@string/createOrderText"
+                android:text="@string/createOrderTextEN"
                 android:textSize="23sp" />
         </TableRow>
+
+        <TableRow
+            android:id="@+id/loginButtonRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp" />
 
         <TableRow
             android:id="@+id/orderHistoryRow"
@@ -59,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="111dp"
                 android:backgroundTint="#7E4C9F"
-                android:text="@string/viewOrderText"
+                android:text="@string/viewOrderTextEN"
                 android:textSize="15sp" />
         </TableRow>
 
@@ -75,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 android:backgroundTint="#7E4C9E"
-                android:text="@string/logoutText"
+                android:text="@string/logoutTextEN"
                 android:textSize="15sp" />
         </TableRow>
     </TableLayout>

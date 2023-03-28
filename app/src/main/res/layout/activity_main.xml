@@ -29,7 +29,7 @@
                 android:layout_width="404dp"
                 android:layout_height="300dp"
                 android:gravity="center"
-                android:text="@string/welcomeMessage"
+                android:text="@string/welcomeMessageEN"
                 android:textAlignment="center"
                 android:textColor="#D64242"
                 android:textSize="32sp" />
@@ -50,7 +50,7 @@
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="text"
-                android:text="@string/loginText" />
+                android:text="@string/loginTextEN" />
 
         </TableRow>
 
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:backgroundTint="#7E4C9E"
-                android:text="@string/loginButtonText" />
+                android:text="@string/loginButtonTextEN" />
         </TableRow>
 
         <TableRow
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:backgroundTint="#D54242"
-                android:text="@string/createAccountText" />
+                android:text="@string/createAccountTextEN" />
         </TableRow>
 
         <TableRow
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/bottomCopyrightText"
+                android:text="@string/bottomCopyrightTextEN"
                 android:textColor="#7E4C9D"
                 android:textSize="16sp" />
         </TableRow>
@@ -105,7 +105,7 @@
         android:layout_height="59dp"
         android:layout_marginStart="300dp"
         android:backgroundTint="#D44242"
-        android:text="@string/frenchLabel"
+        android:text="@string/frenchLabelEN"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tableLayout2" />
 

@@ -28,7 +28,7 @@
                 android:layout_width="404dp"
                 android:layout_height="200dp"
                 android:gravity="center"
-                android:text="@string/createAccountScreenText"
+                android:text="@string/createAccountTextEN"
                 android:textColor="#D01F3C"
                 android:textSize="34sp" />
         </TableRow>
@@ -43,7 +43,7 @@
                 android:id="@+id/firstNamePromptTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/firstNameCreateText"
+                android:text="@string/firstNameCreateTextEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
         </TableRow>
@@ -54,7 +54,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/firstnameEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:background="#C2B4B4"
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
-                android:text="@string/lastNameCreateText"
+                android:text="@string/lastNameCreateTextEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
         </TableRow>
@@ -83,7 +83,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/lastnameEditTExt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#C2B4B4"
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
-                android:text="@string/loginCreate"
+                android:text="@string/loginCreateEN"
                 android:textColor="#EFEFEF"
                 android:textSize="18sp" />
         </TableRow>
@@ -134,7 +134,7 @@
                 android:layout_height="90dp"
                 android:backgroundTint="#CF1F3C"
                 android:gravity="center"
-                android:text="@string/createAccountText"
+                android:text="@string/createAccountTextEN"
                 android:textSize="18sp" />
         </TableRow>
     </TableLayout>
@@ -144,6 +144,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#CF1F3C"
-        android:text="@string/backText"
-        app:cornerRadius="30dp" />
+        android:text="@string/backTextEN"
+        app:cornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

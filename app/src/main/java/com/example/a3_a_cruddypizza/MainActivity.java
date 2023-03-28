@@ -2,12 +2,18 @@ package com.example.a3_a_cruddypizza;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +23,12 @@ public class MainActivity extends AppCompatActivity {
     EditText loginEditText;
 
 
+    SharedPreferenceHelper preferences;
+
     Intent mainMenu, accountCreation;
+
+
+    boolean isFrench;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         accountCreation = new Intent(getApplicationContext(), AccountCreation.class);
 
 
+        preferences = new SharedPreferenceHelper(this);
+        isFrench = preferences.isFrench();
 
 
 
@@ -54,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.changeLanguageButton:
+
                     break;
                 case R.id.loginButton:
                     if ()
@@ -68,4 +82,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+
+    public void updateLanguage(){
+        String[] textArray;
+        ArrayList<String> textOptions;
+
+        if (isFrench){
+            textArray = getResources().getStringArray(R.array.toppingsFrench);
+            textOptions = new ArrayList<>(Arrays.asList(textArray));
+
+        }
+        else {
+            textArray = getResources().getStringArray(R.array.toppingsEnglish);
+            textOptions = new ArrayList<>(Arrays.asList(textArray));
+
+        }
+    }
 }
