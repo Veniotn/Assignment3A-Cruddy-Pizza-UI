@@ -1,25 +1,18 @@
 package com.example.a3_a_cruddypizza;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BasicActivity {
 
     Button loginButton, createAccountButton, changeLanguageButton;
 
-    TextView welcomeTextView;
+    TextView welcomeTextView, copyrightTextView;
     EditText loginEditText;
 
 
@@ -27,8 +20,16 @@ public class MainActivity extends AppCompatActivity {
 
     Intent mainMenu, accountCreation;
 
+    enum index{
+        CHANGE_LANGUAGE_BUTTON,
+        WELCOME_TEXTVIEW,
+        LOGIN_TEXTVIEW,
+        LOGIN_BUTTON,
+        CREATE_ACCOUNT_BUTTON,
+        COPYRIGHT_TEXT
+    }
 
-    boolean isFrench;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +45,18 @@ public class MainActivity extends AppCompatActivity {
         createAccountButton = findViewById(R.id.createAccountButton);
         createAccountButton.setOnClickListener(buttonClicked);
 
-        welcomeTextView = findViewById(R.id.welcomeUserTextView);
-        loginEditText = findViewById(R.id.loginEditText);
+        welcomeTextView   = findViewById(R.id.welcomeUserTextView);
+        copyrightTextView = findViewById(R.id.bottomTextView);
+        loginEditText     = findViewById(R.id.loginEditText);
 
 
-        mainMenu = new Intent(getApplicationContext(), MainMenu.class);
-        accountCreation = new Intent(getApplicationContext(), AccountCreation.class);
+        mainMenu          = new Intent(getApplicationContext(), MainMenu.class);
+        accountCreation   = new Intent(getApplicationContext(), AccountCreation.class);
+
+        preferences       = new SharedPreferenceHelper(this);
 
 
-        preferences = new SharedPreferenceHelper(this);
-        isFrench = preferences.isFrench();
-
-
-
-
-
+        updateLanguage();
     }
 
 
@@ -67,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.changeLanguageButton:
-
+                    preferences.onUpdate();
+                    updateLanguage();
                     break;
                 case R.id.loginButton:
-                    if ()
                     startActivity(mainMenu);
                     break;
                 case R.id.createAccountButton:
@@ -85,18 +83,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void updateLanguage(){
-        String[] textArray;
-        ArrayList<String> textOptions;
+        //
+        String[] textArray  = preferences.isFrench() ? getResources().getStringArray(R.array.loginScreenFrench)
+                : getResources().getStringArray(R.array.loginScreenEnglish);
+        ArrayList<String> textOptions = new ArrayList<>(Arrays.asList(textArray));
 
-        if (isFrench){
-            textArray = getResources().getStringArray(R.array.toppingsFrench);
-            textOptions = new ArrayList<>(Arrays.asList(textArray));
-
-        }
-        else {
-            textArray = getResources().getStringArray(R.array.toppingsEnglish);
-            textOptions = new ArrayList<>(Arrays.asList(textArray));
-
-        }
+        changeLanguageButton.setText(textOptions.get(index.CHANGE_LANGUAGE_BUTTON.ordinal()));
+        welcomeTextView.setText(textOptions.get(index.WELCOME_TEXTVIEW.ordinal()));
+        loginEditText.setText(textOptions.get(index.LOGIN_TEXTVIEW.ordinal()));
+        loginButton.setText(textOptions.get(index.LOGIN_BUTTON.ordinal()));
+        createAccountButton.setText(textOptions.get(index.CREATE_ACCOUNT_BUTTON.ordinal()));
+        copyrightTextView.setText(textOptions.get(index.COPYRIGHT_TEXT.ordinal()));
     }
 }

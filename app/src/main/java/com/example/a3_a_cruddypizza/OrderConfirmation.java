@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class OrderConfirmation extends AppCompatActivity {
+public class OrderConfirmation extends BasicActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_confirmation);
+    }
+
+    @Override
+    protected void updateLanguage() {
+
     }
 }

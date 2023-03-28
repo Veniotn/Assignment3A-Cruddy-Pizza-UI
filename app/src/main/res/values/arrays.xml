@@ -18,12 +18,14 @@
     </array>
 
     <array name="mainMenuEnglish">
+        <item>@string/frenchLabel</item>
         <item>@string/welcomeUserTextEN</item>
         <item>@string/createOrderTextEN</item>
         <item>@string/viewOrderTextEN</item>
         <item>@string/logoutTextEN</item>
     </array>
     <array name="mainMenuFrench">
+        <item>@string/englishLabel</item>
         <item>@string/welcomeUserTextFR</item>
         <item>@string/createOrderTextFR</item>
         <item>@string/viewOrderTextFR</item>
@@ -31,16 +33,26 @@
     </array>
 
     <array name="orderCreationEnglish">
-        <item>@string/pepperoniTextEN</item>
-        <item>@string/sausageTextEN</item>
-        <item>@string/baconTextEN</item>
-        <item>@string/tomatoTextEN</item>
+        <item>@string/frenchLabel</item>
+        <item>@string/makePizzaTextEN</item>
+        <item>@string/sizePromptTextEN</item>
+        <item>@string/toppingsPromptTextEN</item>
+        <item>@string/toppingOnePromptEN</item>
+        <item>@string/toppingTwoPromptEN</item>
+        <item>@string/toppingThreePromptEN</item>
+        <item>@string/confirmOrderTextEN</item>
+        <item>@string/backTextEN</item>
     </array>
     <array name="orderCreationFrench">
-        <item>@string/pepperoniTextEN</item>
-        <item>@string/sausageTextEN</item>
-        <item>@string/baconTextEN</item>
-        <item>@string/tomatoTextEN</item>
+        <item>@string/englishLabel</item>
+        <item>@string/makePizzaTextFR</item>
+        <item>@string/sizePromptTextFR</item>
+        <item>@string/toppingsPromptTextFR</item>
+        <item>@string/toppingOnePromptFR</item>
+        <item>@string/toppingTwoPromptFR</item>
+        <item>@string/toppingThreePromptFR</item>
+        <item>@string/confirmOrderTextFR</item>
+        <item>@string/backTextFR</item>
     </array>
 
     <array name="sizeOptionsEnglish">
@@ -49,62 +61,74 @@
         <item>@string/sizeLargeTextEN</item>
     </array>
     <array name="sizeOptionsFrench">
-        <item>@string/pepperoniTextEN</item>
-        <item>@string/sausageTextEN</item>
-        <item>@string/baconTextEN</item>
-        <item>@string/tomatoTextEN</item>
+        <item>@string/sizeSmallTextFR</item>
+        <item>@string/sizeMediumTextFR</item>
+        <item>@string/sizeLargeTextFR</item>
     </array>
 
     <array name="toppingsEnglish">
-        <item>@string/pepperoniTextEN</item>
         <item>@string/sausageTextEN</item>
+        <item>@string/pepperoniTextEN</item>
         <item>@string/baconTextEN</item>
         <item>@string/tomatoTextEN</item>
     </array>
     <array name="toppingsFrench">
-
+        <item>@string/sausageTextFR</item>
+        <item>@string/pepperoniTextFR</item>
+        <item>@string/baconTextFR</item>
+        <item>@string/tomatoTextFR</item>
     </array>
 
     <array name="orderConfirmationEnglish">
-        <item>@string/pepperoniTextEN</item>
-        <item>@string/sausageTextEN</item>
-        <item>@string/baconTextEN</item>
-        <item>@string/tomatoTextEN</item>
+        <item>@string/frenchLabel</item>
+        <item>@string/orderConfirmedTextEN</item>
+        <item>@string/orderIdPromptTextEN</item>
+        <item>@string/pizzaSizePromptTextEN</item>
+        <item>@string/toppingThreePromptEN</item>
     </array>
 
     <array name="orderConfirmationFrench">
-        <item>@string/pepperoniTextEN</item>
-        <item>@string/sausageTextEN</item>
-        <item>@string/baconTextEN</item>
-        <item>@string/tomatoTextEN</item>
+        <item>@string/englishLabel</item>
+        <item>@string/orderConfirmedTextFR</item>
+        <item>@string/orderIdPromptTextFR</item>
+        <item>@string/pizzaSizePromptTextFR</item>
+        <item>@string/toppingThreePromptFR</item>
     </array>
 
     <array name="orderHistoryEnglish">
-        <item>@string/pepperoniTextEN</item>
-        <item>@string/sausageTextEN</item>
-        <item>@string/baconTextEN</item>
-        <item>@string/tomatoTextEN</item>
+        <item>@string/backTextEN</item>
+        <item>@string/frenchLabel</item>
+        <item>@string/orderHistoryTextEN</item>
     </array>
 
     <array name="orderHistoryFrench">
-        <item>@string/pepperoniTextEN</item>
-        <item>@string/sausageTextEN</item>
-        <item>@string/baconTextEN</item>
-        <item>@string/tomatoTextEN</item>
+        <item>@string/backTextFR</item>
+        <item>@string/englishLabel</item>
+        <item>@string/orderHistoryTextFR</item>
     </array>
 
     <array name="modifyOrderEnglish">
-        <item>@string/pepperoniTextEN</item>
-        <item>@string/sausageTextEN</item>
-        <item>@string/baconTextEN</item>
-        <item>@string/tomatoTextEN</item>
+        <item>@string/frenchLabel</item>
+        <item>@string/makePizzaTextEN</item>
+        <item>@string/sizePromptTextEN</item>
+        <item>@string/toppingsPromptTextEN</item>
+        <item>@string/toppingOnePromptEN</item>
+        <item>@string/toppingTwoPromptEN</item>
+        <item>@string/toppingThreePromptEN</item>
+        <item>@string/confirmOrderTextEN</item>
+        <item>@string/backTextEN</item>
     </array>
 
     <array name="modifyOrderFrench">
-        <item>@string/pepperoniTextEN</item>
-        <item>@string/sausageTextEN</item>
-        <item>@string/baconTextEN</item>
-        <item>@string/tomatoTextEN</item>
+        <item>@string/englishLabel</item>
+        <item>@string/makePizzaTextFR</item>
+        <item>@string/sizePromptTextFR</item>
+        <item>@string/toppingsPromptTextFR</item>
+        <item>@string/toppingOnePromptFR</item>
+        <item>@string/toppingTwoPromptFR</item>
+        <item>@string/toppingThreePromptFR</item>
+        <item>@string/confirmOrderTextFR</item>
+        <item>@string/backTextFR</item>
     </array>
 
 

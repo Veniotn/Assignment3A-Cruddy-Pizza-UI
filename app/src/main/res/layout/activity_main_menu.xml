@@ -18,7 +18,7 @@
         <TableRow
             android:id="@+id/topRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingTop="30dp">
 
             <TextView
@@ -69,31 +69,29 @@
                 android:textSize="15sp" />
         </TableRow>
 
-        <TableRow
-            android:id="@+id/logoutButtonRow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingTop="175dp">
-
-            <Button
-                android:id="@+id/logoutButton"
-                android:layout_width="wrap_content"
-                android:layout_height="90dp"
-                android:backgroundTint="#7E4C9E"
-                android:text="@string/logoutTextEN"
-                android:textSize="15sp" />
-        </TableRow>
     </TableLayout>
 
     <Button
         android:id="@+id/changeLanguageButton"
-        android:layout_width="117dp"
-        android:layout_height="57dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="#D01F3C"
         android:gravity="center"
         android:text="@string/frenchLabel"
         app:layout_constraintEnd_toEndOf="@+id/tableLayout"
         tools:layout_editor_absoluteY="3dp" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="298dp"
+        android:backgroundTint="#7E4C9E"
+        android:text="@string/logoutTextEN"
+        android:textSize="15sp"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

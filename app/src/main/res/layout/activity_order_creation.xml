@@ -54,7 +54,7 @@
                 android:layout_height="60dp"
                 android:background="#C1B3B3"
                 android:entries="@array/sizeOptionsEnglish"
-                android:prompt="@string/app_nameEN"
+                android:prompt="@string/app_name"
                 android:spinnerMode="dropdown" />
 
         </TableRow>
@@ -85,18 +85,18 @@
                 android:layout_height="60dp"
                 android:background="#C1B3B3"
                 android:entries="@array/toppingsEnglish"
-                android:prompt="@string/app_nameEN"
+                android:prompt="@string/app_name"
                 android:spinnerMode="dropdown" />
 
         </TableRow>
 
         <TableRow
-            android:id="@+id/toppingTwoPromptTextView"
+            android:id="@+id/toppingTwoRow"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/toppingTwoPromptText"
+                android:id="@+id/toppingTwoPromptTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
@@ -116,7 +116,7 @@
                 android:layout_height="60dp"
                 android:background="#C1B3B3"
                 android:entries="@array/toppingsEnglish"
-                android:prompt="@string/app_nameEN"
+                android:prompt="@string/app_name"
                 android:spinnerMode="dropdown" />
 
         </TableRow>
@@ -147,7 +147,7 @@
                 android:layout_height="60dp"
                 android:background="#C1B3B3"
                 android:entries="@array/toppingsEnglish"
-                android:prompt="@string/app_nameEN"
+                android:prompt="@string/app_name"
                 android:spinnerMode="dropdown" />
         </TableRow>
 
@@ -169,7 +169,7 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/backButton"
         android:layout_width="117dp"
         android:layout_height="59dp"
         android:backgroundTint="#CE1F3C"
@@ -177,11 +177,11 @@
         app:cornerRadius="30dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/changeLanguageButton"
         android:layout_width="117dp"
         android:layout_height="59dp"
         android:layout_marginStart="295dp"
         android:backgroundTint="#CF1F3C"
-        android:text="@string/frenchLabelEN"
+        android:text="@string/frenchLabel"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 <resources>
     //english values
-    <string name="app_nameEN">CRUDDY Pizza Ordering App</string>
+    <string name="app_name">CRUDDY Pizza Ordering App</string>
     <string name="welcomeMessageEN">Welcome to CRUDDY Pizza!</string>
     <string name="loginTextEN">Enter Login</string>
     <string name="loginButtonTextEN">Login!</string>

@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ModifyOrder extends AppCompatActivity {
+public class ModifyOrder extends BasicActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_order);
+    }
+
+    @Override
+    protected void updateLanguage() {
+
     }
 }

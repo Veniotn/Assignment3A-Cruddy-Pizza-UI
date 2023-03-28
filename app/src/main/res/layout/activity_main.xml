@@ -105,7 +105,7 @@
         android:layout_height="59dp"
         android:layout_marginStart="300dp"
         android:backgroundTint="#D44242"
-        android:text="@string/frenchLabelEN"
+        android:text="@string/frenchLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tableLayout2" />
 

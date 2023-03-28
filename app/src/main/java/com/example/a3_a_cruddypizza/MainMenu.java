@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainMenu extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class MainMenu extends BasicActivity {
 
     Button createOrderButton, viewOrderHistoryButton, changeLanguageButton,
     logoutButton;
@@ -17,6 +20,16 @@ public class MainMenu extends AppCompatActivity {
 
     Intent orderCreation, orderHistory, startScreen;
 
+    SharedPreferenceHelper preferences;
+
+
+    enum index{
+        CHANGE_LANGUAGE_BUTTON,
+        WELCOME_USER_TEXTVIEW,
+        CREATE_ORDER_BUTTON,
+        VIEW_ORDER_HISTORY_BUTTON,
+        LOGOUT_BUTTON
+    }
 
 
 
@@ -46,10 +59,10 @@ public class MainMenu extends AppCompatActivity {
         orderHistory  = new Intent(getApplicationContext(), OrderHistory.class);
         startScreen   = new Intent(getApplicationContext(), MainActivity.class);
 
+        preferences = new SharedPreferenceHelper(this);
 
 
-        Customer customer = new Customer("nick", "veniot", "rat");
-        orderHistory.pute
+        updateLanguage();
     }
 
 
@@ -66,6 +79,8 @@ public class MainMenu extends AppCompatActivity {
                     startActivity(orderHistory);
                     break;
                 case R.id.changeLanguageButton:
+                    preferences.onUpdate();
+                    updateLanguage();
                     break;
                 case R.id.logoutButton:
                     startActivity(startScreen);
@@ -75,4 +90,20 @@ public class MainMenu extends AppCompatActivity {
             }
         }
     };
+
+
+    @Override
+    protected void updateLanguage() {
+        String[] array = preferences.isFrench() ? getResources().getStringArray(R.array.mainMenuFrench)
+                                                : getResources().getStringArray(R.array.mainMenuEnglish);
+        ArrayList<String> textOptions = new ArrayList<>(Arrays.asList(array));
+
+
+        changeLanguageButton.setText(textOptions.get(index.CHANGE_LANGUAGE_BUTTON.ordinal()));
+        welcomeUserTextView.setText(textOptions.get(index.WELCOME_USER_TEXTVIEW.ordinal()));
+        createOrderButton.setText(textOptions.get(index.CREATE_ORDER_BUTTON.ordinal()));
+        viewOrderHistoryButton.setText(textOptions.get(index.VIEW_ORDER_HISTORY_BUTTON.ordinal()));
+        logoutButton.setText(textOptions.get(index.LOGOUT_BUTTON.ordinal()));
+
+    }
 }
