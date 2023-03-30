@@ -21,7 +21,7 @@ public class OrderCreation extends BasicActivity {
 
     TextView headerText, selectSizePrompt, toppingOnePrompt, toppingTwoPrompt, toppingThreePrompt;
 
-    Spinner sizeSpinner;
+    Spinner sizeSpinner, toppingOneSpinner, toppingTwoSpinner, toppingThreeSpinner;
 
     Button confirmOrderButton, changeLanguageButton, backButton;
 
@@ -46,29 +46,32 @@ public class OrderCreation extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_creation);
 
-        headerText = findViewById(R.id.orderCreationTopTextView);
-        selectSizePrompt = findViewById(R.id.sizePromptTextView);
-        toppingOnePrompt = findViewById(R.id.toppingOnePromptTextView);
-        toppingTwoPrompt = findViewById(R.id.toppingTwoPromptTextView);
+        headerText         = findViewById(R.id.orderCreationTopTextView);
+        selectSizePrompt   = findViewById(R.id.sizePromptTextView);
+        toppingOnePrompt   = findViewById(R.id.toppingOnePromptTextView);
+        toppingTwoPrompt   = findViewById(R.id.toppingTwoPromptTextView);
         toppingThreePrompt = findViewById(R.id.toppingThreePromptTextView);
 
 
         changeLanguageButton = findViewById(R.id.changeLanguageButton);
-        backButton = findViewById(R.id.backButton);
-        confirmOrderButton = findViewById(R.id.confirmOrderButton);
+        backButton           = findViewById(R.id.backButton);
+        confirmOrderButton   = findViewById(R.id.confirmOrderButton);
 
         changeLanguageButton.setOnClickListener(buttonClicked);
         backButton.setOnClickListener(buttonClicked);
         confirmOrderButton.setOnClickListener(buttonClicked);
 
-        sizeSpinner = findViewById(R.id.sizeSpinner);
+        sizeSpinner         = findViewById(R.id.sizeSpinner);
+        toppingOneSpinner   = findViewById(R.id.toppingOneSpinner);
+        toppingTwoSpinner   = findViewById(R.id.toppingTwoSpinner);
+        toppingThreeSpinner = findViewById(R.id.toppingThreeSpinner);
 
 
         preferences = new SharedPreferenceHelper(this);
 
 
         orderConfirmationScreen = new Intent(getApplicationContext(), OrderConfirmation.class);
-        mainMenu = new Intent(getApplicationContext(), MainMenu.class);
+        mainMenu                = new Intent(getApplicationContext(), MainMenu.class);
 
         LocalDate currentDate = LocalDate.now();
 
@@ -118,5 +121,16 @@ public class OrderCreation extends BasicActivity {
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, textArray);
         sizeSpinner.setAdapter(spinnerAdapter);
         spinnerAdapter.notifyDataSetChanged();
+
+
+        textArray = preferences.isFrench() ? getResources().getStringArray(R.array.toppingsFrench)
+                                           : getResources().getStringArray(R.array.toppingsEnglish);
+        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, textArray);
+        toppingOneSpinner.setAdapter(spinnerAdapter);
+        toppingTwoSpinner.setAdapter(spinnerAdapter);
+        toppingThreeSpinner.setAdapter(spinnerAdapter);
+        spinnerAdapter.notifyDataSetChanged();
+
+
     }
 }

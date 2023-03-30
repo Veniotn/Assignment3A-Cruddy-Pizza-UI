@@ -83,7 +83,6 @@ public class MainActivity extends BasicActivity {
 
 
     public void updateLanguage(){
-        //
         String[] textArray  = preferences.isFrench() ? getResources().getStringArray(R.array.loginScreenFrench)
                 : getResources().getStringArray(R.array.loginScreenEnglish);
         ArrayList<String> textOptions = new ArrayList<>(Arrays.asList(textArray));

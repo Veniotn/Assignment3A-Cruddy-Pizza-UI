@@ -16,6 +16,25 @@
         <item>@string/createAccountTextFR</item>
         <item>@string/bottomCopyrightTextFR</item>
     </array>
+    <array name="accountCreationEnglish">
+        <item>@string/backTextEN</item>
+        <item>@string/frenchLabel</item>
+        <item>@string/createAccountScreenTextEN</item>
+        <item>@string/firstNameCreateTextEN</item>
+        <item>@string/lastNameCreateTextEN</item>
+        <item>@string/loginTextEN</item>
+        <item>@string/createAccountTextEN</item>
+    </array>
+    <array name="accountCreationFrench">
+        <item>@string/backTextFR</item>
+        <item>@string/englishLabel</item>
+        <item>@string/createAccountScreenTextFR</item>
+        <item>@string/firstNameCreateTextFR</item>
+        <item>@string/lastNameCreateTextFR</item>
+        <item>@string/loginTextFR</item>
+        <item>@string/createAccountTextFR</item>
+    </array>
+
 
     <array name="mainMenuEnglish">
         <item>@string/frenchLabel</item>
@@ -34,25 +53,24 @@
 
     <array name="orderCreationEnglish">
         <item>@string/frenchLabel</item>
+        <item>@string/backTextEN</item>
         <item>@string/makePizzaTextEN</item>
         <item>@string/sizePromptTextEN</item>
-        <item>@string/toppingsPromptTextEN</item>
         <item>@string/toppingOnePromptEN</item>
         <item>@string/toppingTwoPromptEN</item>
         <item>@string/toppingThreePromptEN</item>
         <item>@string/confirmOrderTextEN</item>
-        <item>@string/backTextEN</item>
     </array>
     <array name="orderCreationFrench">
         <item>@string/englishLabel</item>
+        <item>@string/backTextFR</item>
         <item>@string/makePizzaTextFR</item>
         <item>@string/sizePromptTextFR</item>
-        <item>@string/toppingsPromptTextFR</item>
         <item>@string/toppingOnePromptFR</item>
         <item>@string/toppingTwoPromptFR</item>
         <item>@string/toppingThreePromptFR</item>
         <item>@string/confirmOrderTextFR</item>
-        <item>@string/backTextFR</item>
+
     </array>
 
     <array name="sizeOptionsEnglish">
@@ -83,16 +101,20 @@
         <item>@string/frenchLabel</item>
         <item>@string/orderConfirmedTextEN</item>
         <item>@string/orderIdPromptTextEN</item>
+        <item>@string/orderDatePromptTextEN</item>
         <item>@string/pizzaSizePromptTextEN</item>
-        <item>@string/toppingThreePromptEN</item>
+        <item>@string/toppingsPromptTextEN</item>
+        <item>@string/mainMenuTextEN</item>
     </array>
 
     <array name="orderConfirmationFrench">
         <item>@string/englishLabel</item>
         <item>@string/orderConfirmedTextFR</item>
         <item>@string/orderIdPromptTextFR</item>
+        <item>@string/orderDatePromptTextFR</item>
         <item>@string/pizzaSizePromptTextFR</item>
-        <item>@string/toppingThreePromptFR</item>
+        <item>@string/toppingsPromptTextFR</item>
+        <item>@string/mainMenuTextFR</item>
     </array>
 
     <array name="orderHistoryEnglish">

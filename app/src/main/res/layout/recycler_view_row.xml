@@ -37,11 +37,11 @@
                 android:text="@string/defaultOrderIDEN"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/pizzaSizeLabel"
+                app:layout_constraintEnd_toStartOf="@+id/pizzaSizePrompt"
                 app:layout_constraintStart_toEndOf="@+id/orderIDLabel" />
 
             <TextView
-                android:id="@+id/pizzaSizeLabel"
+                android:id="@+id/pizzaSizePrompt"
                 android:layout_width="75dp"
                 android:layout_height="51dp"
                 android:gravity="center"
@@ -60,32 +60,33 @@
                 android:text="@string/sizeMediumTextEN"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/orderDateTextView"
-                app:layout_constraintStart_toEndOf="@+id/pizzaSizeLabel"
+                app:layout_constraintEnd_toStartOf="@+id/orderDateText"
+                app:layout_constraintStart_toEndOf="@+id/pizzaSizePrompt"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/orderDateLabel"
+                android:id="@+id/orderDateText"
                 android:layout_width="109dp"
                 android:layout_height="51dp"
                 android:layout_marginEnd="2dp"
                 android:gravity="center"
-                android:text="@string/orderDatePromptTextEN"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/orderDateTextView"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/orderDateTextView"
-                android:layout_width="74dp"
-                android:layout_height="51dp"
-                android:gravity="center"
                 android:text="@string/defaultOrderDateTextEN"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/orderDateLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/orderDateText"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/orderDateText"
+                android:layout_width="74dp"
+                android:layout_height="51dp"
+                android:gravity="center"
+                android:text="@string/orderDatePromptTextEN"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/orderDateText"
                 app:layout_constraintStart_toEndOf="@+id/pizzaSizeTextView"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
