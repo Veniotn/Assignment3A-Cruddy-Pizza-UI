@@ -18,7 +18,6 @@ public class AccountCreation extends BasicActivity {
     TextView headerText, firstNamePrompt, lastNamePrompt, loginPrompt;
     EditText firstNameEditText, lastNameEditText, loginEditText;
     Intent loginScreen;
-    SharedPreferenceHelper preferences;
     enum index{
         BACK_BUTTON,
         LANGUAGE_BUTTON,
@@ -77,8 +76,11 @@ public class AccountCreation extends BasicActivity {
                     updateLanguage();
                     break;
                 case R.id.createAccountButton:
+                    loginScreen.putExtra("Customer", new Customer(
+                                       firstNameEditText.getText().toString(),
+                                       lastNameEditText.getText().toString(),
+                                       loginEditText.getText().toString()));
                     startActivity(loginScreen);
-                    System.out.println("");
                     break;
                 default:
                     break;

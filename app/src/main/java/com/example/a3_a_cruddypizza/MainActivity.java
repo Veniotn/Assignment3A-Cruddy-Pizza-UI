@@ -10,16 +10,15 @@ import java.util.Arrays;
 
 public class MainActivity extends BasicActivity {
 
+    //Ui
     Button loginButton, createAccountButton, changeLanguageButton;
-
     TextView welcomeTextView, copyrightTextView;
     EditText loginEditText;
 
 
-    SharedPreferenceHelper preferences;
-
     Intent mainMenu, accountCreation;
 
+    //used for text options when updating language
     enum index{
         CHANGE_LANGUAGE_BUTTON,
         WELCOME_TEXTVIEW,
@@ -31,10 +30,15 @@ public class MainActivity extends BasicActivity {
 
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        customer =  getIntent().getSerializableExtra("Customer", Customer.class);
 
         changeLanguageButton = findViewById(R.id.changeLanguageButton);
         changeLanguageButton.setOnClickListener(buttonClicked);
@@ -56,7 +60,20 @@ public class MainActivity extends BasicActivity {
         preferences       = new SharedPreferenceHelper(this);
 
 
-        updateLanguage();
+
+
+
+
+        if (customer!=null) {
+
+
+            mainMenu.putExtra("Customer", customer);
+        }
+
+
+
+
+//        updateLanguage();
     }
 
 
@@ -69,6 +86,9 @@ public class MainActivity extends BasicActivity {
                     updateLanguage();
                     break;
                 case R.id.loginButton:
+                    validateLogin();
+
+                    mainMenu.putExtra("Customer", customer);
                     startActivity(mainMenu);
                     break;
                 case R.id.createAccountButton:
@@ -93,5 +113,25 @@ public class MainActivity extends BasicActivity {
         loginButton.setText(textOptions.get(index.LOGIN_BUTTON.ordinal()));
         createAccountButton.setText(textOptions.get(index.CREATE_ACCOUNT_BUTTON.ordinal()));
         copyrightTextView.setText(textOptions.get(index.COPYRIGHT_TEXT.ordinal()));
+    }
+
+
+    public void validateLogin(){
+        customer = new Customer("","","");
+        if (customer == null ){
+
+            welcomeTextView.setText(preferences.isFrench() ? R.string.createAccountScreenTextFR
+                                                           : R.string.createAccountScreenTextEN);
+        }
+        else if (!loginEditText.getText().toString().equals(customer.getLogin())){
+            welcomeTextView.setText(preferences.isFrench() ? R.string.incorrectLoginFR
+                                                           : R.string.incorrectLoginEN);
+        }
+        else {
+
+        }
+        mainMenu.putExtra("Customer", customer);
+        startActivity(mainMenu);
+
     }
 }

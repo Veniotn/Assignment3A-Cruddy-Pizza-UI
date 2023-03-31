@@ -153,5 +153,15 @@
         <item>@string/backTextFR</item>
     </array>
 
+    <array name="orderDetailsEN">
+        <item>@string/orderIdPromptTextEN</item>
+        <item>@string/pizzaSizePromptTextEN</item>
+        <item>@string/orderDatePromptTextEN</item>
+    </array>
+    <array name="orderDetailsFR">
+        <item>@string/orderIdPromptTextFR</item>
+        <item>@string/pizzaSizePromptTextFR</item>
+        <item>@string/orderDatePromptTextFR</item>
+    </array>
 
 </resources>

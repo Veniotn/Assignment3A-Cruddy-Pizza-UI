@@ -20,9 +20,6 @@ public class MainMenu extends BasicActivity {
 
     Intent orderCreation, orderHistory, startScreen;
 
-    SharedPreferenceHelper preferences;
-
-
     enum index{
         CHANGE_LANGUAGE_BUTTON,
         WELCOME_USER_TEXTVIEW,
@@ -38,6 +35,8 @@ public class MainMenu extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        customer = getIntent().getSerializableExtra("Customer", Customer.class);
 
         changeLanguageButton = findViewById(R.id.changeLanguageButton);
         changeLanguageButton.setOnClickListener(buttonClicked);
@@ -62,6 +61,9 @@ public class MainMenu extends BasicActivity {
         preferences = new SharedPreferenceHelper(this);
 
 
+
+
+
         updateLanguage();
     }
 
@@ -73,9 +75,11 @@ public class MainMenu extends BasicActivity {
             switch (v.getId()){
 
                 case R.id.createOrderButton:
+                    orderCreation.putExtra("Customer", customer);
                     startActivity(orderCreation);
                     break;
                 case R.id.viewOrderHistoryButton:
+                    orderHistory.putExtra("Customer", customer);
                     startActivity(orderHistory);
                     break;
                 case R.id.changeLanguageButton:
@@ -83,6 +87,7 @@ public class MainMenu extends BasicActivity {
                     updateLanguage();
                     break;
                 case R.id.logoutButton:
+                    startScreen.putExtra("Customer", customer);
                     startActivity(startScreen);
                 default:
                     break;
@@ -104,6 +109,10 @@ public class MainMenu extends BasicActivity {
         createOrderButton.setText(textOptions.get(index.CREATE_ORDER_BUTTON.ordinal()));
         viewOrderHistoryButton.setText(textOptions.get(index.VIEW_ORDER_HISTORY_BUTTON.ordinal()));
         logoutButton.setText(textOptions.get(index.LOGOUT_BUTTON.ordinal()));
+
+        if (customer!=null){
+            welcomeUserTextView.setText(textOptions.get(index.WELCOME_USER_TEXTVIEW.ordinal()));
+        }
 
     }
 }

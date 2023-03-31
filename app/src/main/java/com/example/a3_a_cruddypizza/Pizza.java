@@ -1,6 +1,8 @@
 package com.example.a3_a_cruddypizza;
 
-public class Pizza {
+import java.io.Serializable;
+
+public class Pizza  implements Serializable {
     String size, topping1, topping2, topping3;
 
     public Pizza(String size, String topping1, String topping2, String topping3) {

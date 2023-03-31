@@ -1,6 +1,8 @@
 package com.example.a3_a_cruddypizza;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +10,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class OrderHistory extends BasicActivity implements RecyclerViewInterface{
+public class OrderHistory extends BasicActivity{
 
     Button backButton, changeLanguageButton;
     TextView headerText;
+    RecyclerView orderHistory;
+    OrderHistory_RecyclerAdapter recyclerAdapter;
 
     Intent mainMenu;
-
-    SharedPreferenceHelper preferences;
 
     enum  index{
         BACK_BUTTON,
@@ -26,10 +29,15 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
         HEADER_TEXT
     }
 
+
+    ArrayList<PizzaOrder> orders = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
+
+        customer = getIntent().getSerializableExtra("Customer", Customer.class);
 
         backButton = findViewById(R.id.backButton);
         changeLanguageButton = findViewById(R.id.changeLanguageButton);
@@ -43,7 +51,17 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
 
         preferences = new SharedPreferenceHelper(this);
 
+        orderHistory = findViewById(R.id.orderHistoryRecyclerView);
 
+        fillOrderView();
+
+        recyclerAdapter = new OrderHistory_RecyclerAdapter(orders, this);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
+
+        orderHistory.setLayoutManager(manager);
+        orderHistory.setAdapter(recyclerAdapter);
+
+        updateLanguage();
     }
 
 
@@ -53,6 +71,7 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
 
             switch (v.getId()){
                 case R.id.backButton:
+                    mainMenu.putExtra("Customer", customer);
                     startActivity(mainMenu);
                     break;
                 case R.id.changeLanguageButton:
@@ -76,8 +95,8 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
 
     }
 
-    @Override
-    public void orderClicked(int position) {
 
-    }
+
+
+    private void fillOrderView(){orders = customer.getPizzaOrders();}
 }

@@ -16,7 +16,7 @@ public class OrderConfirmation extends BasicActivity {
                          orderIdText,   orderDateText,   pizzaSizeText,   toppingsText;
 
     Intent mainMenu;
-    SharedPreferenceHelper preferences;
+
 
     enum index{
         CHANGE_LANGUAGE,
@@ -32,6 +32,8 @@ public class OrderConfirmation extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_confirmation);
+
+        customer = getIntent().getSerializableExtra("Customer", Customer.class);
 
         changeLanguageButton = findViewById(R.id.changeLanguageButton);
         changeLanguageButton.setOnClickListener(buttonClicked);
@@ -65,6 +67,7 @@ public class OrderConfirmation extends BasicActivity {
                     updateLanguage();
                     break;
                 case R.id.mainMenuButton:
+                    mainMenu.putExtra("Customer", customer);
                     startActivity(mainMenu);
                     break;
                 default:

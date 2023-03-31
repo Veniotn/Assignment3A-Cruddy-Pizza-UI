@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 abstract class BasicActivity extends AppCompatActivity {
-
+    Customer customer;
+    SharedPreferenceHelper preferences;
 
     //Since every activity has its own UI elements and arrays to draw from, we will make
     //each activity their own updateLanguage method.

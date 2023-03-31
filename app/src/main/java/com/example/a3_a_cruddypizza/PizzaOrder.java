@@ -1,17 +1,19 @@
 package com.example.a3_a_cruddypizza;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class PizzaOrder {
+public class PizzaOrder implements Serializable {
 
-    private   int       orderID;
-    private   LocalDate orderDate;
-    private   Pizza     Pizza;
+    private   int     orderID;
+    private   LocalDate  orderDate;
+    private   Pizza   pizza;
 
 
-    public PizzaOrder(LocalDate orderDate, int orderID) {
+    public PizzaOrder(LocalDate orderDate, int orderID, Pizza pizza) {
         this.orderDate = orderDate;
         this.orderID = orderID;
+        this.pizza =  pizza;
     }
 
 
@@ -24,8 +26,8 @@ public class PizzaOrder {
         return orderDate;
     }
 
-    public Pizza getPizza() {
-        return Pizza;
-    }
+    public Pizza getPizza() {return pizza;}
+
+    public void setPizza(Pizza pizza){this.pizza = pizza;}
 
 }

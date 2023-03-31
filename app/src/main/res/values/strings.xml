@@ -1,12 +1,13 @@
 <resources>
     //english values
     <string name="app_name">CRUDDY Pizza Ordering App</string>
+    <string name="incorrectLoginEN">Incorrect login.</string>
     <string name="welcomeMessageEN">Welcome to CRUDDY Pizza!</string>
     <string name="loginTextEN">Enter Login</string>
     <string name="loginButtonTextEN">Login!</string>
     <string name="createAccountTextEN">Create Account!</string>
     <string name="bottomCopyrightTextEN">2023, NSCC Software.</string>
-    <string name="welcomeUserTextEN">user here</string>
+    <string name="welcomeUserTextEN">Welcome </string>
     <string name="createOrderTextEN">Create Order!</string>
     <string name="modifyOrderTextEN">Modify order</string>
     <string name="viewOrderTextEN">View order history</string>
@@ -44,6 +45,7 @@
     //end english values
     //french values
     <string name="createOrderTextFR">Créer une commande !</string>
+    <string name="incorrectLoginFR">Créer une commande !</string>
     <string name="viewOrderTextFR">Voir l\'historique des commandes</string>
     <string name="welcomeUserTextFR">user here</string>
     <string name="app_nameFR">Application de commande de pizza CRUDDY</string>
@@ -83,5 +85,8 @@
     <string name="orderHistoryTextFR">Historique des commandes :</string>
     <string name="medAbreviationFR">MOY</string>
     <string name="bottomCopyrightTextFR">2023, NSCC logiciel.</string>
+    <string name="sizeMediumShortEN">MED</string>
+    <string name="sizeSmallShortEN">SML</string>
+    <string name="sizeLargeShortEN">LG</string>
     //end french values
 </resources>

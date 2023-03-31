@@ -1,9 +1,13 @@
 package com.example.a3_a_cruddypizza;
 
+import android.content.Context;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer implements Serializable {
+
     private String firstName, lastName, login;
     private int totalOrders;
     private ArrayList<PizzaOrder> pizzaOrders;
@@ -16,9 +20,28 @@ public class Customer {
         this.pizzaOrders = new ArrayList<PizzaOrder>();
     }
 
-    public void addPizzaOrder() {
-        //Add one to the total orders to be used as the order ID and make a new order.
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public int getTotalOrders() {
+        return totalOrders;
+    }
+
+    public void addOrder() {
         this.totalOrders++;
-        this.pizzaOrders.add(new PizzaOrder(LocalDate.now(), totalOrders));
+    }
+
+    public ArrayList<PizzaOrder> getPizzaOrders() {
+        return pizzaOrders;
     }
 }

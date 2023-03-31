@@ -16,16 +16,11 @@ import java.util.Arrays;
 
 public class OrderCreation extends BasicActivity {
 
-    ArrayList<PizzaOrder> orders = new ArrayList<PizzaOrder>();
-
-
     TextView headerText, selectSizePrompt, toppingOnePrompt, toppingTwoPrompt, toppingThreePrompt;
-
     Spinner sizeSpinner, toppingOneSpinner, toppingTwoSpinner, toppingThreeSpinner;
-
     Button confirmOrderButton, changeLanguageButton, backButton;
+    Intent orderConfirmationScreen, mainMenu;
 
-    SharedPreferenceHelper preferences;
 
     enum index {
 
@@ -39,12 +34,14 @@ public class OrderCreation extends BasicActivity {
         CONFIRM_BUTTON
     };
 
-    Intent orderConfirmationScreen, mainMenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_creation);
+
+        customer = getIntent().getSerializableExtra("Customer", Customer.class);
 
         headerText         = findViewById(R.id.orderCreationTopTextView);
         selectSizePrompt   = findViewById(R.id.sizePromptTextView);
@@ -89,9 +86,11 @@ public class OrderCreation extends BasicActivity {
                     updateLanguage();
                     break;
                 case R.id.backButton:
+                    mainMenu.putExtra("Customer", customer);
                     startActivity(mainMenu);
                     break;
                 case R.id.confirmOrderButton:
+                    addOrder();
                     startActivity(orderConfirmationScreen);
                     break;
             }
@@ -132,5 +131,19 @@ public class OrderCreation extends BasicActivity {
         spinnerAdapter.notifyDataSetChanged();
 
 
+
     }
+
+    public void addOrder(){
+        customer.addOrder();
+
+        customer.getPizzaOrders().add(new PizzaOrder(LocalDate.now(), customer.getTotalOrders(),
+                                                    new Pizza("sml", "pepperoni",
+                                                                          "pineapple",
+                                                                          "cheese")));
+
+        orderConfirmationScreen.putExtra("Customer", customer);
+
+    }
+
 }
