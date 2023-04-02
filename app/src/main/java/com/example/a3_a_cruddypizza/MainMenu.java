@@ -35,20 +35,17 @@ public class MainMenu extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        //setup activity
         customer = getIntent().getSerializableExtra("Customer", Customer.class);
-
-        changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
-        changeLanguageButton.setOnClickListener(buttonClicked);
 
         welcomeUserTextView = findViewById(R.id.welcomeUserTextView);
 
+        changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
+        changeLanguageButton.setOnClickListener(buttonClicked);
         createOrderButton = findViewById(R.id.createOrderButton);
         createOrderButton.setOnClickListener(buttonClicked);
-
-
         viewOrderHistoryButton = findViewById(R.id.viewOrderHistoryButton);
         viewOrderHistoryButton.setOnClickListener(buttonClicked);
-
         logoutButton = findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(buttonClicked);
 
@@ -60,10 +57,6 @@ public class MainMenu extends BasicActivity {
         preferences = new SharedPreferenceHelper(this);
 
 
-
-
-        pizza = getIntent().getSerializableExtra("pizza", Pizza.class);
-
         updateLanguage();
     }
 
@@ -73,7 +66,6 @@ public class MainMenu extends BasicActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-
                 case R.id.createOrderButton:
                     orderCreation.putExtra("Customer", customer);
                     startActivity(orderCreation);
@@ -109,10 +101,5 @@ public class MainMenu extends BasicActivity {
         createOrderButton.setText(textOptions.get(index.CREATE_ORDER_BUTTON.ordinal()));
         viewOrderHistoryButton.setText(textOptions.get(index.VIEW_ORDER_HISTORY_BUTTON.ordinal()));
         logoutButton.setText(textOptions.get(index.LOGOUT_BUTTON.ordinal()));
-
-        if (customer!=null){
-            welcomeUserTextView.setText(textOptions.get(index.WELCOME_USER_TEXTVIEW.ordinal()));
-        }
-
     }
 }

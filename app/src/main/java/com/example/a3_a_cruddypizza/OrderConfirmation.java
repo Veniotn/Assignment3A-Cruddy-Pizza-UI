@@ -35,6 +35,7 @@ public class OrderConfirmation extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_confirmation);
 
+        //get order and customer
         order = getIntent().getSerializableExtra("pizzaOrder", PizzaOrder.class);
         customer = getIntent().getSerializableExtra("Customer", Customer.class);
 

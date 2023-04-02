@@ -75,8 +75,6 @@ public class ModifyOrder extends BasicActivity{
 
 
         updateLanguage();
-
-
     }
 
 
@@ -88,9 +86,14 @@ public class ModifyOrder extends BasicActivity{
                     preferences.onUpdate();
                     updateLanguage();
                     break;
-                default:
+                case R.id.backButton:
+                    startActivity(orderHistory);
+                    break;
+                case R.id.confirmEditButton:
                     modifyPizza();
                     startActivity(orderHistory);
+                    break;
+                default:
                     break;
             }
         }
@@ -113,6 +116,8 @@ public class ModifyOrder extends BasicActivity{
         confirmButton.setText(textOptions.get(index.CONFIRM_TEXT.ordinal()));
 
 
+        //reuse the same routine for the spinner objects but add the resouces to the spinner
+        // adapter.
         array = preferences.isFrench() ? getResources().getStringArray(R.array.sizeOptionsFrench)
                                        : getResources().getStringArray(R.array.sizeOptionsEnglish);
 
@@ -121,6 +126,7 @@ public class ModifyOrder extends BasicActivity{
         sizeSpinner.setAdapter(spinnerAdapter);
         spinnerAdapter.notifyDataSetChanged();
 
+
         array = preferences.isFrench() ? getResources().getStringArray(R.array.toppingsFrench)
                                        : getResources().getStringArray(R.array.toppingsEnglish);
         spinnerAdapter = new ArrayAdapter<>(this,
@@ -128,6 +134,7 @@ public class ModifyOrder extends BasicActivity{
         toppingOneSpinner.setAdapter(spinnerAdapter);
         toppingTwoSpinner.setAdapter(spinnerAdapter);
         toppingThreeSpinner.setAdapter(spinnerAdapter);
+        //commit the changes and update the ui
         spinnerAdapter.notifyDataSetChanged();
 
     }
@@ -139,7 +146,7 @@ public class ModifyOrder extends BasicActivity{
         pizza.setTopping1(toppingOneSpinner.getSelectedItem().toString());
         pizza.setTopping2(toppingTwoSpinner.getSelectedItem().toString());
         pizza.setTopping3(toppingThreeSpinner.getSelectedItem().toString());
-//        commit the changes to the old pizza
+//        commit the changes to the old pizza(Will be a DB call in the future)
         if (pizzaUpdatedListener != null){
             pizzaUpdatedListener.updatePizza(pizza);
         }

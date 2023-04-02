@@ -15,7 +15,7 @@ public class MainActivity extends BasicActivity {
     private TextView welcomeTextView, copyrightTextView;
     private EditText loginEditText;
 
-
+    //activities
     private Intent mainMenu, accountCreation;
 
     //used for text options when updating language
@@ -29,15 +29,12 @@ public class MainActivity extends BasicActivity {
     }
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //give everything functionality
         customer =  getIntent().getSerializableExtra("Customer", Customer.class);
 
         changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
@@ -53,24 +50,20 @@ public class MainActivity extends BasicActivity {
         copyrightTextView = findViewById(R.id.bottomTextView);
         loginEditText     = findViewById(R.id.loginEditText);
 
-
         mainMenu          = new Intent(getApplicationContext(), MainMenu.class);
         accountCreation   = new Intent(getApplicationContext(), AccountCreation.class);
 
         preferences       = new SharedPreferenceHelper(this);
 
-
-
-
-
+        //When you first open the app the customer will be null, once we create an account
+        // and return to the login screen, add the customer to the main menu
+        // (WILL BE DB).
 
         if (customer!=null) {
             mainMenu.putExtra("Customer", customer);
         }
 
-
-
-
+        //update the gui based on preferences.
         updateLanguage();
     }
 
@@ -85,8 +78,6 @@ public class MainActivity extends BasicActivity {
                     break;
                 case R.id.loginButton:
                     validateLogin();
-
-                    mainMenu.putExtra("Customer", customer);
                     startActivity(mainMenu);
                     break;
                 case R.id.createAccountButton:
@@ -101,10 +92,13 @@ public class MainActivity extends BasicActivity {
 
 
     public void updateLanguage(){
+        //create a string array of the screens resources based off of the preferences .isFrench boolean.
         String[] textArray  = preferences.isFrench() ? getResources().getStringArray(R.array.loginScreenFrench)
                 : getResources().getStringArray(R.array.loginScreenEnglish);
+        //convert it to an arraylist
         ArrayList<String> textOptions = new ArrayList<>(Arrays.asList(textArray));
 
+        //update the gui
         changeLanguageButton.setText(textOptions.get(index.CHANGE_LANGUAGE_BUTTON.ordinal()));
         welcomeTextView.setText(textOptions.get(index.WELCOME_TEXTVIEW.ordinal()));
         loginEditText.setText(textOptions.get(index.LOGIN_TEXTVIEW.ordinal()));
@@ -116,19 +110,25 @@ public class MainActivity extends BasicActivity {
 
 
     public void validateLogin(){
-        customer = new Customer("","","");
-        if (customer == null ){
+        customer = new Customer("","","");//Used for testing
 
+        if (customer == null ){
+            //if theres no customer object prompt them to make a account
             welcomeTextView.setText(preferences.isFrench() ? R.string.createAccountScreenTextFR
                                                            : R.string.createAccountScreenTextEN);
         }
         else if (!loginEditText.getText().toString().equals(customer.getLogin())){
+
+            //if the customer object has been created but the login is incorrect,
+            // prompt the user.
             welcomeTextView.setText(preferences.isFrench() ? R.string.incorrectLoginFR
                                                            : R.string.incorrectLoginEN);
         }
         else {
 
         }
+
+        //this wil, be in the else in the future, here now for testing.
         mainMenu.putExtra("Customer", customer);
         startActivity(mainMenu);
 
