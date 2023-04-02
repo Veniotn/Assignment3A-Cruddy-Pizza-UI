@@ -174,14 +174,17 @@
         android:layout_height="59dp"
         android:backgroundTint="#CE1F3C"
         android:text="@string/backTextEN"
-        app:cornerRadius="30dp" />
+        app:cornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/changeLanguageButton"
+        android:id="@+id/orderHistoryChangeLanguageButton"
         android:layout_width="117dp"
         android:layout_height="59dp"
         android:layout_marginStart="295dp"
         android:backgroundTint="#CF1F3C"
         android:text="@string/frenchLabel"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

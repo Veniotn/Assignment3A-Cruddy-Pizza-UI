@@ -52,20 +52,17 @@
             </androidx.recyclerview.widget.RecyclerView>
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
     </TableLayout>
 
     <Button
-        android:id="@+id/changeLanguageButton"
+        android:id="@+id/orderHistoryChangeLanguageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
         android:backgroundTint="#F44336"
         android:text="@string/frenchLabel"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/backButton"
@@ -73,5 +70,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#D01F3C"
         android:text="@string/backTextEN"
-        app:cornerRadius="30dp" />
+        app:cornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

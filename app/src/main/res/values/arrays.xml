@@ -130,27 +130,25 @@
     </array>
 
     <array name="modifyOrderEnglish">
+        <item>@string/backTextEN</item>
         <item>@string/frenchLabel</item>
-        <item>@string/makePizzaTextEN</item>
+        <item>@string/modifyOrderTextEN</item>
         <item>@string/sizePromptTextEN</item>
-        <item>@string/toppingsPromptTextEN</item>
         <item>@string/toppingOnePromptEN</item>
         <item>@string/toppingTwoPromptEN</item>
         <item>@string/toppingThreePromptEN</item>
         <item>@string/confirmOrderTextEN</item>
-        <item>@string/backTextEN</item>
     </array>
 
     <array name="modifyOrderFrench">
+        <item>@string/backTextFR</item>
         <item>@string/englishLabel</item>
-        <item>@string/makePizzaTextFR</item>
+        <item>@string/modifyOrderTextFR</item>
         <item>@string/sizePromptTextFR</item>
-        <item>@string/toppingsPromptTextFR</item>
         <item>@string/toppingOnePromptFR</item>
         <item>@string/toppingTwoPromptFR</item>
         <item>@string/toppingThreePromptFR</item>
         <item>@string/confirmOrderTextFR</item>
-        <item>@string/backTextFR</item>
     </array>
 
     <array name="orderDetailsEN">
@@ -163,5 +161,4 @@
         <item>@string/pizzaSizePromptTextFR</item>
         <item>@string/orderDatePromptTextFR</item>
     </array>
-
 </resources>

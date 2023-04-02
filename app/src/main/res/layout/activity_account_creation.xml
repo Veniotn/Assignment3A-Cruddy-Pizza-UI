@@ -57,6 +57,7 @@
                 android:id="@+id/firstnameEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
+                android:autofillHints="@string/firstNameCreateTextEN"
                 android:background="#C2B4B4"
                 android:ems="10"
                 android:inputType="textPersonName" />
@@ -140,13 +141,14 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/changeLanguageButton"
+        android:id="@+id/orderHistoryChangeLanguageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
         android:backgroundTint="#CE1F3C"
         android:text="@string/frenchLabel"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/backButton"
@@ -155,5 +157,6 @@
         android:backgroundTint="#CF1F3C"
         android:text="@string/backTextEN"
         app:cornerRadius="30dp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,11 +11,13 @@ import java.util.Arrays;
 
 public class OrderConfirmation extends BasicActivity {
 
-    Button changeLanguageButton, mainMenuButton;
-    TextView headerText, orderIdPrompt, orderDatePrompt, pizzaSizePrompt, toppingsPrompt,
+    private PizzaOrder order;
+
+    private Button changeLanguageButton, mainMenuButton;
+    private TextView headerText, orderIdPrompt, orderDatePrompt, pizzaSizePrompt, toppingsPrompt,
                          orderIdText,   orderDateText,   pizzaSizeText,   toppingsText;
 
-    Intent mainMenu;
+    private Intent mainMenu;
 
 
     enum index{
@@ -33,9 +35,10 @@ public class OrderConfirmation extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_confirmation);
 
+        order = getIntent().getSerializableExtra("pizzaOrder", PizzaOrder.class);
         customer = getIntent().getSerializableExtra("Customer", Customer.class);
 
-        changeLanguageButton = findViewById(R.id.changeLanguageButton);
+        changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
         changeLanguageButton.setOnClickListener(buttonClicked);
 
         mainMenuButton = findViewById(R.id.mainMenuButton);
@@ -62,7 +65,7 @@ public class OrderConfirmation extends BasicActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.changeLanguageButton:
+                case R.id.orderHistoryChangeLanguageButton:
                     preferences.onUpdate();
                     updateLanguage();
                     break;
@@ -82,13 +85,21 @@ public class OrderConfirmation extends BasicActivity {
         String [] array = preferences.isFrench() ? getResources().getStringArray(R.array.orderConfirmationFrench)
                                                  : getResources().getStringArray(R.array.orderConfirmationEnglish);
         ArrayList<String> textOptions = new ArrayList<>(Arrays.asList(array));
+        String toppingsMessage;
 
-            changeLanguageButton.setText(textOptions.get(index.CHANGE_LANGUAGE.ordinal()));
-            headerText.setText(textOptions.get(index.HEADER_TEXT.ordinal()));
-            orderIdPrompt.setText(textOptions.get(index.ORDERID_PROMPT.ordinal()));
-            orderDatePrompt.setText(textOptions.get(index.ORDER_DATE_PROMPT.ordinal()));
-            pizzaSizePrompt.setText(textOptions.get(index.PIZZA_SIZE_PROMPT.ordinal()));
-            toppingsPrompt.setText(textOptions.get(index.TOPPINGS_PROMPT.ordinal()));
-            mainMenuButton.setText(textOptions.get(index.MAIN_MENU_BUTTON.ordinal()));
+        //set the text of the UI
+        changeLanguageButton.setText(textOptions.get(index.CHANGE_LANGUAGE.ordinal()));
+        headerText.setText(textOptions.get(index.HEADER_TEXT.ordinal()));
+        orderIdPrompt.setText(textOptions.get(index.ORDERID_PROMPT.ordinal()));
+        orderIdText.setText(String.valueOf(order.getOrderID() +1));
+        orderDatePrompt.setText(textOptions.get(index.ORDER_DATE_PROMPT.ordinal()));
+        orderDateText.setText(order.getOrderDate().toString());
+        pizzaSizePrompt.setText(textOptions.get(index.PIZZA_SIZE_PROMPT.ordinal()));
+        pizzaSizeText.setText(order.getPizza().getSize());
+        toppingsPrompt.setText(textOptions.get(index.TOPPINGS_PROMPT.ordinal()));
+        toppingsMessage = "-" + order.getPizza().getTopping1() + "\n-" + order.getPizza().getTopping2()
+                        + "\n-" + order.getPizza().getTopping3();
+        toppingsText.setText(toppingsMessage);
+        mainMenuButton.setText(textOptions.get(index.MAIN_MENU_BUTTON.ordinal()));
     }
 }

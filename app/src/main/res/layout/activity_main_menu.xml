@@ -72,14 +72,14 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/changeLanguageButton"
+        android:id="@+id/orderHistoryChangeLanguageButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#D01F3C"
         android:gravity="center"
         android:text="@string/frenchLabel"
         app:layout_constraintEnd_toEndOf="@+id/tableLayout"
-        tools:layout_editor_absoluteY="3dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/logoutButton"

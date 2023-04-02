@@ -3,7 +3,11 @@ package com.example.a3_a_cruddypizza;
 import java.io.Serializable;
 
 public class Pizza  implements Serializable {
-    String size, topping1, topping2, topping3;
+    private String size, topping1, topping2, topping3;
+
+    //listener to update the state of a pizza when modified
+//    private PizzaUpdated listener;
+
 
     public Pizza(String size, String topping1, String topping2, String topping3) {
         this.size = size;
@@ -12,6 +16,14 @@ public class Pizza  implements Serializable {
         this.topping3 = topping3;
     }
 
+    public interface PizzaUpdated  {
+        void updatePizza(Pizza pizza);
+    }
+
+
+//    public void setListener(PizzaUpdated listener){
+//        this.listener = listener;
+//    }
 
     public String getSize() {
         return size;

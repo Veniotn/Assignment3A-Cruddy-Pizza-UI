@@ -1,7 +1,5 @@
 package com.example.a3_a_cruddypizza;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,14 +11,14 @@ import java.util.Arrays;
 
 public class MainMenu extends BasicActivity {
 
-    Button createOrderButton, viewOrderHistoryButton, changeLanguageButton,
+    private Button createOrderButton, viewOrderHistoryButton, changeLanguageButton,
     logoutButton;
 
-    TextView welcomeUserTextView;
+    private TextView welcomeUserTextView;
 
-    Intent orderCreation, orderHistory, startScreen;
+    private Intent orderCreation, orderHistory, startScreen;
 
-    enum index{
+    private enum index{
         CHANGE_LANGUAGE_BUTTON,
         WELCOME_USER_TEXTVIEW,
         CREATE_ORDER_BUTTON,
@@ -29,6 +27,7 @@ public class MainMenu extends BasicActivity {
     }
 
 
+    Pizza pizza;
 
 
     @Override
@@ -38,7 +37,7 @@ public class MainMenu extends BasicActivity {
 
         customer = getIntent().getSerializableExtra("Customer", Customer.class);
 
-        changeLanguageButton = findViewById(R.id.changeLanguageButton);
+        changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
         changeLanguageButton.setOnClickListener(buttonClicked);
 
         welcomeUserTextView = findViewById(R.id.welcomeUserTextView);
@@ -63,6 +62,7 @@ public class MainMenu extends BasicActivity {
 
 
 
+        pizza = getIntent().getSerializableExtra("pizza", Pizza.class);
 
         updateLanguage();
     }
@@ -82,7 +82,7 @@ public class MainMenu extends BasicActivity {
                     orderHistory.putExtra("Customer", customer);
                     startActivity(orderHistory);
                     break;
-                case R.id.changeLanguageButton:
+                case R.id.orderHistoryChangeLanguageButton:
                     preferences.onUpdate();
                     updateLanguage();
                     break;

@@ -4,23 +4,26 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 //https://www.youtube.com/watch?v=Mc0XT58A1Z4 Recycler view tutorial
-public class OrderHistory_RecyclerAdapter extends RecyclerView.Adapter<OrderHistory_RecyclerAdapter.MyViewHolder> {
+public class OrderHistory_RecyclerAdapter extends RecyclerView.Adapter<OrderHistory_RecyclerAdapter.MyViewHolder> implements Serializable {
+private final RecyclerViewInterface recyclerViewInterface;
 
-    Context context;
-    SharedPreferenceHelper preferences;
+    private Context context;
+    private SharedPreferenceHelper preferences;
 
-    ArrayList<PizzaOrder> orders;
+    private ArrayList<PizzaOrder> orders;
 
-    enum index {
+    private enum index {
        ORDER_ID_PROMPT,
        SIZE_PROMPT,
        ORDER_DATE_PROMPT,
@@ -28,24 +31,47 @@ public class OrderHistory_RecyclerAdapter extends RecyclerView.Adapter<OrderHist
 
 
 
-    public OrderHistory_RecyclerAdapter(ArrayList<PizzaOrder> orders, Context context){
+    public OrderHistory_RecyclerAdapter(ArrayList<PizzaOrder> orders, Context context,
+                                        RecyclerViewInterface recyclerViewInterface){
         this.context = context;
         this.orders = orders;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements Serializable {
+
+        Button changeLanguageButton;
+
         TextView orderIDPrompt, sizePrompt, orderDatePrompt,
                 orderIDText,   sizeText,   orderDate;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
+            orderIDPrompt        = itemView.findViewById(R.id.orderIDPrompt);
+            orderIDText          = itemView.findViewById(R.id.orderIDText);
+            sizePrompt           = itemView.findViewById(R.id.pizzaSizePrompt);
+            sizeText             = itemView.findViewById(R.id.pizzaSizeText);
+            orderDatePrompt      = itemView.findViewById(R.id.orderDatePrompt);
+            orderDate            = itemView.findViewById(R.id.orderDateText);
+            changeLanguageButton =  itemView.findViewById(R.id.orderHistoryChangeLanguageButton);
 
-            orderIDPrompt   = (TextView)  itemView.findViewById(R.id.orderIDPrompt);
-            orderIDText     = (TextView)  itemView.findViewById(R.id.orderIDText);
-            sizePrompt      = (TextView)  itemView.findViewById(R.id.pizzaSizePrompt);
-            sizeText        = (TextView)  itemView.findViewById(R.id.pizzaSizeText);
-            orderDatePrompt = (TextView)  itemView.findViewById(R.id.orderDatePrompt);
-            orderDate       = (TextView)  itemView.findViewById(R.id.orderDateText);
+            //responds when user presses on order
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null){
+
+                        //get the item that was clicked
+                        int position = getAdapterPosition();
+
+                        //if a item is found fire the onclick method in the order class
+                        if (position != RecyclerView.NO_POSITION){
+                        recyclerViewInterface.orderClicked(position);
+                        }
+                    }
+                }
+            });
+
         }
     }
 
@@ -57,7 +83,7 @@ public class OrderHistory_RecyclerAdapter extends RecyclerView.Adapter<OrderHist
         preferences = new SharedPreferenceHelper(context);
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_row, parent, false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, recyclerViewInterface);
     }
 
     @Override
@@ -77,8 +103,8 @@ public class OrderHistory_RecyclerAdapter extends RecyclerView.Adapter<OrderHist
         //Assign values to the view we created in the recycler view row layout file
         holder.orderIDPrompt.setText(textOptions.get(index.ORDER_ID_PROMPT.ordinal()));
         holder.orderIDText.setText(String.valueOf(orders.get(position).getOrderID()));
-
         holder.sizePrompt.setText(textOptions.get(index.SIZE_PROMPT.ordinal()));
+        holder.sizeText.setText(orders.get(position).getPizza().getSize());
         holder.orderDatePrompt.setText(textOptions.get(index.ORDER_DATE_PROMPT.ordinal()));
         holder.orderDate.setText(orders.get(position).getOrderDate().toString());
 

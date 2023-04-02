@@ -1,9 +1,9 @@
 package com.example.a3_a_cruddypizza;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,16 +14,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class OrderHistory extends BasicActivity{
+public class OrderHistory extends BasicActivity implements RecyclerViewInterface, Pizza.PizzaUpdated {
 
-    Button backButton, changeLanguageButton;
-    TextView headerText;
-    RecyclerView orderHistory;
-    OrderHistory_RecyclerAdapter recyclerAdapter;
+    private Button backButton, changeLanguageButton;
+    private TextView headerText;
+    private RecyclerView orderHistory;
+    private OrderHistory_RecyclerAdapter recyclerAdapter;
 
-    Intent mainMenu;
+    private Intent mainMenu, modifyOrder;
 
-    enum  index{
+
+
+
+    private enum  index{
         BACK_BUTTON,
         LANGUAGE_BUTTON,
         HEADER_TEXT
@@ -40,7 +43,7 @@ public class OrderHistory extends BasicActivity{
         customer = getIntent().getSerializableExtra("Customer", Customer.class);
 
         backButton = findViewById(R.id.backButton);
-        changeLanguageButton = findViewById(R.id.changeLanguageButton);
+        changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
 
         headerText = findViewById(R.id.orderHistoryTextView);
 
@@ -48,18 +51,23 @@ public class OrderHistory extends BasicActivity{
         changeLanguageButton.setOnClickListener(buttonClicked);
 
         mainMenu = new Intent(getApplicationContext(), MainMenu.class);
+        modifyOrder = new Intent(getApplicationContext(), ModifyOrder.class);
 
         preferences = new SharedPreferenceHelper(this);
+
+
 
         orderHistory = findViewById(R.id.orderHistoryRecyclerView);
 
         fillOrderView();
 
-        recyclerAdapter = new OrderHistory_RecyclerAdapter(orders, this);
+        recyclerAdapter = new OrderHistory_RecyclerAdapter(orders, this, this);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
 
         orderHistory.setLayoutManager(manager);
         orderHistory.setAdapter(recyclerAdapter);
+
+
 
         updateLanguage();
     }
@@ -74,15 +82,23 @@ public class OrderHistory extends BasicActivity{
                     mainMenu.putExtra("Customer", customer);
                     startActivity(mainMenu);
                     break;
-                case R.id.changeLanguageButton:
+                case R.id.orderHistoryChangeLanguageButton:
                     preferences.onUpdate();
                     updateLanguage();
-
+                    break;
             }
 
         }
     };
 
+    @Override
+    public void orderClicked(int position) {
+        modifyOrder.putExtra("pizza", orders.get(position).getPizza());
+        startActivity(modifyOrder);
+
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void updateLanguage() {
         String [] array = preferences.isFrench() ? getResources().getStringArray(R.array.orderHistoryFrench)
@@ -93,10 +109,36 @@ public class OrderHistory extends BasicActivity{
         changeLanguageButton.setText(textOptions.get(index.LANGUAGE_BUTTON.ordinal()));
         headerText.setText(textOptions.get(index.HEADER_TEXT.ordinal()));
 
+        //update recycler
+        recyclerAdapter.notifyDataSetChanged();
+
+
+    }
+
+    @Override
+    public void updatePizza(Pizza pizza) {
+
+        //find the index of the current pizza in the old list
+        int orderIndex = orders.indexOf(pizza);
+
+        //update the pizza;
+        orders.get(orderIndex).setPizza(pizza);
+
     }
 
 
 
 
-    private void fillOrderView(){orders = customer.getPizzaOrders();}
+    private void fillOrderView(){
+        if (customer!=null){
+            orders = customer.getPizzaOrders();
+        }
+
+        //all issues will be fixed when adding DB
+        //set listeners on all pizza orders
+//        for (PizzaOrder order : orders){
+//            order.getPizza().setListener(this);
+//        }
+//
+    }
 }

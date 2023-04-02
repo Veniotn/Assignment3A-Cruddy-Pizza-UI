@@ -1,7 +1,5 @@
 package com.example.a3_a_cruddypizza;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,10 +12,10 @@ import java.util.Arrays;
 
 public class AccountCreation extends BasicActivity {
 
-    Button backButton, changeLanguageButton, createAccountButton;
-    TextView headerText, firstNamePrompt, lastNamePrompt, loginPrompt;
-    EditText firstNameEditText, lastNameEditText, loginEditText;
-    Intent loginScreen;
+    private Button backButton, changeLanguageButton, createAccountButton;
+    private TextView headerText, firstNamePrompt, lastNamePrompt, loginPrompt;
+    private EditText firstNameEditText, lastNameEditText, loginEditText;
+    private Intent loginScreen;
     enum index{
         BACK_BUTTON,
         LANGUAGE_BUTTON,
@@ -35,7 +33,7 @@ public class AccountCreation extends BasicActivity {
 
         //buttons
         backButton            = findViewById(R.id.backButton);
-        changeLanguageButton  = findViewById(R.id.changeLanguageButton);
+        changeLanguageButton  = findViewById(R.id.orderHistoryChangeLanguageButton);
         createAccountButton   = findViewById(R.id.createAccountButton);
 
         //button listeners
@@ -71,7 +69,7 @@ public class AccountCreation extends BasicActivity {
                 case R.id.backButton:
                     startActivity(loginScreen);
                     break;
-                case R.id.changeLanguageButton:
+                case R.id.orderHistoryChangeLanguageButton:
                     preferences.onUpdate();
                     updateLanguage();
                     break;

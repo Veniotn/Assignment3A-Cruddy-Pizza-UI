@@ -6,4 +6,175 @@
     android:layout_height="match_parent"
     tools:context=".ModifyOrder">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#302B2B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow
+            android:id="@+id/editOrderHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/editOrderHeaderText"
+                android:layout_width="404dp"
+                android:layout_height="150dp"
+                android:backgroundTint="#CD1F3C"
+                android:gravity="center"
+                android:text="@string/modifyOrderTextEN"
+                android:textColor="#CE1F3C"
+                android:textSize="34sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/sizePromptRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/editSizePrompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sizePromptTextEN"
+                android:textColor="#F0EFEF"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/editSizeRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:id="@+id/editSizeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#C0B2B2"
+                android:entries="@array/sizeOptionsEnglish" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/editTopping1PromptRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/editTopping1Prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40dp"
+                android:text="@string/toppingOnePromptEN"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/editTopping1Row"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:id="@+id/editTopping1Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#C0B2B2"
+                android:entries="@array/toppingsEnglish" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/editTopping2PromptRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/editTopping2Prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40dp"
+                android:text="@string/toppingTwoPromptEN"
+                android:textColor="#F0EFEF"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/editTopping2Row"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:id="@+id/editTopping2Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#C0B2B2"
+                android:entries="@array/toppingsEnglish" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/editTopping3PromptRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/editTopping3Prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40dp"
+                android:text="@string/toppingThreePromptEN"
+                android:textColor="#F0EFEF"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/editTopping3Row"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:id="@+id/editTopping3Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#C0B2B2"
+                android:entries="@array/toppingsEnglish" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/confirmEditButtonRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="20dp">
+
+            <Button
+                android:id="@+id/confirmEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="110dp"
+                android:backgroundTint="#CE1F3C"
+                android:text="@string/confirmEditText"
+                android:textSize="23sp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="117dp"
+        android:layout_height="59dp"
+        android:backgroundTint="#CE1F3C"
+        android:text="@string/backTextEN"
+        app:cornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/changeLanguageButton"
+        android:layout_width="117dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="295dp"
+        android:backgroundTint="#CE1F3C"
+        android:text="@string/frenchLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

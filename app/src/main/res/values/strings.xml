@@ -88,5 +88,7 @@
     <string name="sizeMediumShortEN">MED</string>
     <string name="sizeSmallShortEN">SML</string>
     <string name="sizeLargeShortEN">LG</string>
+    <string name="confirmEditText">Confirm Edit</string>
+    <string name="modifyOrderTextFR">Modifier la commande</string>
     //end french values
 </resources>

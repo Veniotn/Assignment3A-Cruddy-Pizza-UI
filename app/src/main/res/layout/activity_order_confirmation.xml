@@ -7,6 +7,7 @@
     tools:context=".OrderConfirmation">
 
     <TableLayout
+        android:id="@+id/tableLayout5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#302B2B"
@@ -26,7 +27,7 @@
                 android:id="@+id/headerTextView"
                 android:layout_width="404dp"
                 android:layout_height="60dp"
-                android:gravity="bottom|left"
+                android:gravity="bottom|start"
                 android:text="@string/orderConfirmedTextEN"
                 android:textColor="#FFFFFF"
                 android:textSize="34sp" />
@@ -131,7 +132,7 @@
         <TableRow
             android:id="@+id/toppingsLabelRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/toppingsPrompt"
@@ -146,7 +147,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/toppingsText"
@@ -175,11 +176,12 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/changeLanguageButton"
+        android:id="@+id/orderHistoryChangeLanguageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="304dp"
         android:backgroundTint="#CE1F3C"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/frenchLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

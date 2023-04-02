@@ -1,7 +1,5 @@
 package com.example.a3_a_cruddypizza;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,10 +14,11 @@ import java.util.Arrays;
 
 public class OrderCreation extends BasicActivity {
 
-    TextView headerText, selectSizePrompt, toppingOnePrompt, toppingTwoPrompt, toppingThreePrompt;
-    Spinner sizeSpinner, toppingOneSpinner, toppingTwoSpinner, toppingThreeSpinner;
-    Button confirmOrderButton, changeLanguageButton, backButton;
-    Intent orderConfirmationScreen, mainMenu;
+    private TextView headerText, selectSizePrompt, toppingOnePrompt, toppingTwoPrompt, toppingThreePrompt;
+    private Spinner sizeSpinner, toppingOneSpinner, toppingTwoSpinner, toppingThreeSpinner;
+    private Button confirmOrderButton, changeLanguageButton, backButton;
+    private Intent orderConfirmationScreen, mainMenu;
+
 
 
     enum index {
@@ -50,7 +49,7 @@ public class OrderCreation extends BasicActivity {
         toppingThreePrompt = findViewById(R.id.toppingThreePromptTextView);
 
 
-        changeLanguageButton = findViewById(R.id.changeLanguageButton);
+        changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
         backButton           = findViewById(R.id.backButton);
         confirmOrderButton   = findViewById(R.id.confirmOrderButton);
 
@@ -81,7 +80,7 @@ public class OrderCreation extends BasicActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.changeLanguageButton:
+                case R.id.orderHistoryChangeLanguageButton:
                     preferences.onUpdate();
                     updateLanguage();
                     break;
@@ -135,15 +134,24 @@ public class OrderCreation extends BasicActivity {
     }
 
     public void addOrder(){
-        customer.addOrder();
 
+        String size, top1, top2, top3;
+
+        size = sizeSpinner.getSelectedItem().toString();
+        top1 = toppingOneSpinner.getSelectedItem().toString();
+        top2 = toppingTwoSpinner.getSelectedItem().toString();
+        top3 = toppingThreeSpinner.getSelectedItem().toString();
+
+        //create a new pizza order and add it to the customers order list
+        // then pass the pizza to the order confirmation screen.
         customer.getPizzaOrders().add(new PizzaOrder(LocalDate.now(), customer.getTotalOrders(),
-                                                    new Pizza("sml", "pepperoni",
-                                                                          "pineapple",
-                                                                          "cheese")));
-
+                                      new Pizza(size, top1, top2, top3)));
+        PizzaOrder pizzaOrder = customer.getPizzaOrders().get(customer.getTotalOrders());
+        orderConfirmationScreen.putExtra("pizzaOrder", pizzaOrder);
         orderConfirmationScreen.putExtra("Customer", customer);
 
+        //add one to the customers total orders.
+        customer.addOrder();
     }
 
 }

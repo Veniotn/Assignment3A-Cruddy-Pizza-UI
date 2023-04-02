@@ -11,12 +11,12 @@ import java.util.Arrays;
 public class MainActivity extends BasicActivity {
 
     //Ui
-    Button loginButton, createAccountButton, changeLanguageButton;
-    TextView welcomeTextView, copyrightTextView;
-    EditText loginEditText;
+    private Button loginButton, createAccountButton, changeLanguageButton;
+    private TextView welcomeTextView, copyrightTextView;
+    private EditText loginEditText;
 
 
-    Intent mainMenu, accountCreation;
+    private Intent mainMenu, accountCreation;
 
     //used for text options when updating language
     enum index{
@@ -40,7 +40,7 @@ public class MainActivity extends BasicActivity {
 
         customer =  getIntent().getSerializableExtra("Customer", Customer.class);
 
-        changeLanguageButton = findViewById(R.id.changeLanguageButton);
+        changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
         changeLanguageButton.setOnClickListener(buttonClicked);
 
         loginButton = findViewById(R.id.loginButton);
@@ -65,15 +65,13 @@ public class MainActivity extends BasicActivity {
 
 
         if (customer!=null) {
-
-
             mainMenu.putExtra("Customer", customer);
         }
 
 
 
 
-//        updateLanguage();
+        updateLanguage();
     }
 
 
@@ -81,7 +79,7 @@ public class MainActivity extends BasicActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.changeLanguageButton:
+                case R.id.orderHistoryChangeLanguageButton:
                     preferences.onUpdate();
                     updateLanguage();
                     break;
@@ -113,6 +111,7 @@ public class MainActivity extends BasicActivity {
         loginButton.setText(textOptions.get(index.LOGIN_BUTTON.ordinal()));
         createAccountButton.setText(textOptions.get(index.CREATE_ACCOUNT_BUTTON.ordinal()));
         copyrightTextView.setText(textOptions.get(index.COPYRIGHT_TEXT.ordinal()));
+
     }
 
 

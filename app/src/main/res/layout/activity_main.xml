@@ -100,7 +100,7 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/changeLanguageButton"
+        android:id="@+id/orderHistoryChangeLanguageButton"
         android:layout_width="115dp"
         android:layout_height="59dp"
         android:layout_marginStart="300dp"
