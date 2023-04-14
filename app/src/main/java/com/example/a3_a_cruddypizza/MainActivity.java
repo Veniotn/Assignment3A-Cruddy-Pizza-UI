@@ -1,12 +1,21 @@
 package com.example.a3_a_cruddypizza;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import android.database.*;
 
 public class MainActivity extends BasicActivity {
 
@@ -14,6 +23,7 @@ public class MainActivity extends BasicActivity {
     private Button loginButton, createAccountButton, changeLanguageButton;
     private TextView welcomeTextView, copyrightTextView;
     private EditText loginEditText;
+    private DBAdapter dbAdapter;
 
     //activities
     private Intent mainMenu, accountCreation;
@@ -59,9 +69,12 @@ public class MainActivity extends BasicActivity {
         // and return to the login screen, add the customer to the main menu
         // (WILL BE DB).
 
-        if (customer!=null) {
-            mainMenu.putExtra("Customer", customer);
-        }
+        //attempt to load db file
+        loadDB();
+
+        dbAdapter = new DBAdapter(this);
+
+
 
         //update the gui based on preferences.
         updateLanguage();
@@ -110,7 +123,20 @@ public class MainActivity extends BasicActivity {
 
 
     public void validateLogin(){
-        customer = new Customer("","","");//Used for testing
+        customer = new Customer("", "", "as");
+
+        if (customer != null){
+            dbAdapter.open();
+            cursor = dbAdapter.getCustomer(customer.getLogin());
+            if(cursor.moveToFirst()){
+                dbAdapter.close();
+                startActivity(mainMenu);
+            }
+
+            welcomeTextView.setText(preferences.isFrench() ? R.string.incorrectLoginFR
+                                                           : R.string.incorrectLoginEN);
+        }
+
 
         if (customer == null ){
             //if theres no customer object prompt them to make a account
@@ -128,9 +154,43 @@ public class MainActivity extends BasicActivity {
 
         }
 
-        //this wil, be in the else in the future, here now for testing.
-        mainMenu.putExtra("Customer", customer);
-        startActivity(mainMenu);
+//        //this wil, be in the else in the future, here now for testing.
+//        mainMenu.putExtra("Customer", customer);
+//        startActivity(mainMenu);
 
     }
+
+
+    public void loadDB(){
+        try{
+            //get path of db file.
+            String destPath = "/data/data/" + getPackageName() + "/database/CruddyPizzaDB";
+
+            File dbFile = new File(destPath);
+
+            //if app doesn't already have the db file, open it and write it to the dest path
+            if (!dbFile.exists()){
+                copyDB(getAssets().open(DBAdapter.DB_NAME), new FileOutputStream(destPath));
+            }
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void copyDB(InputStream inputStream, OutputStream outputStream) throws IOException {
+        //copy 1k bytes at a time
+        byte[] buffer = new byte[1024];
+        int length;
+        //while the length of the string returned from .read is greater than 0
+        while((length = inputStream.read(buffer)) > 0)
+        {
+            outputStream.write(buffer,0,length);
+        }
+        inputStream.close();
+        outputStream.close();
+    }//end method CopyDB
 }
