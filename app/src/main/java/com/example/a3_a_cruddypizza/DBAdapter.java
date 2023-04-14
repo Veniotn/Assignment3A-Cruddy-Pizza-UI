@@ -25,7 +25,9 @@ public class DBAdapter {
         public void onCreate(SQLiteDatabase db) {
             //create the tables
             try {
-                db.execSQL(DB_CREATE);
+                db.execSQL(CUSTOMER_TABLE_CREATE);
+                db.execSQL(PIZZA_INFO_TABLE_CREATE);
+                db.execSQL(ORDER_TABLE_CREATE);
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception e) {
@@ -39,7 +41,11 @@ public class DBAdapter {
             //notify user of upgrade
             Log.w(TAG, "Upgraded db from version: " + oldVersion + " to: " + newVersion
                     + "dropping all old data.");
-            String query = "DROP TABLE IF EXISTS customer, orders, pizza_details;";
+            String query = "DROP TABLE IF EXISTS customers; ";
+            db.execSQL(query);
+            query = "DROP TABLE IF EXISTS orders;";
+            db.execSQL(query);
+            query = "DROP TABLE IF EXISTS pizza_info;";
             db.execSQL(query);
             //create new db
             onCreate(db);
@@ -53,7 +59,7 @@ public class DBAdapter {
 
     private Context context;
     public static final int DB_VERSION = 3;
-    public static final String DB_NAME = "CruddyPizzaDB";
+    public static final String DB_NAME = "CruddyPizza.db";
 
     //sql text variables;
     public static final String CUSTOMER_TABLE = "customers";
@@ -70,32 +76,27 @@ public class DBAdapter {
     public static final String TOPPING_THREE  = "topping_three";
 
     //db create statement
-    private static final String DB_CREATE =
-            "CREATE TABLE \"customers\" (\n" +
-                    "\t\"customer_id\"\tINTEGER NOT NULL,\n" +
-                    "\t\"login\"\tTEXT,\n" +
-                    "\tPRIMARY KEY(\"customer_id\" AUTOINCREMENT)\n" +
-                    ")"
-                    +
-                    "CREATE TABLE \"orders\" (\n" +
-                    "\t\"order_id\"\tINTEGER NOT NULL,\n" +
-                    "\t\"pizza_id\"\tINTEGER NOT NULL,\n" +
-                    "\t\"order_date\"\tTEXT NOT NULL,\n" +
-                    "\t\"customer_id\"\tINTEGER NOT NULL,\n" +
-                    "\tUNIQUE(\"pizza_id\"),\n" +
-                    "\tPRIMARY KEY(\"order_id\"),\n" +
-                    "\tFOREIGN KEY(\"customer_id\") REFERENCES \"Customer\",\n" +
-                    "\tFOREIGN KEY(\"pizza_id\") REFERENCES \"pizza_info\"(\"pizza_id\")\n" +
-                    ")"
-                    +
-                    "CREATE TABLE \"pizza_info\" (\n" +
-                    "\t\"pizza_id\"\tINTEGER,\n" +
-                    "\t\"pizza_size\"\tINTEGER NOT NULL,\n" +
-                    "\t\"topping_one\"\tINTEGER NOT NULL,\n" +
-                    "\t\"toping_two\"\tINTEGER NOT NULL,\n" +
-                    "\t\"topping_three\"\tINTEGER NOT NULL,\n" +
-                    "\tPRIMARY KEY(\"pizza_id\" AUTOINCREMENT)\n" +
-                    ")";
+    private static final String CUSTOMER_TABLE_CREATE =
+            "CREATE TABLE " + CUSTOMER_TABLE +
+            " (" + CUSTOMER_ID_PK + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                   CUSTOMER_NAME  + " TEXT);";
+
+    private static final String ORDER_TABLE_CREATE =
+            "CREATE TABLE " + ORDER_TABLE + " ("
+                 + ORDER_ID_PK    + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                   ORDER_DATE     + " TEXT NOT NULL, " +
+                   CUSTOMER_ID_PK + " INTEGER FOREIGN KEY REFERENCES customers( "+CUSTOMER_ID_PK+" ), " +
+                   PIZZA_ID_PK    + " INTEGER FOREIGN KEY REFERENCES pizza_info( "+PIZZA_ID_PK+" ) " +
+                    ");";
+
+    private static final String PIZZA_INFO_TABLE_CREATE =
+            "CREATE TABLE " + PIZZA_TABLE   + " (" +
+                              PIZZA_ID_PK   + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                              PIZZA_SIZE    + " INTEGER NOT NULL, " +
+                              TOPPING_ONE   + " INTEGER NOT NULL, " +
+                              TOPPING_TWO   + " INTEGER NOT NULL, " +
+                              TOPPING_THREE + " INTEGER NOT NULL" +
+                    ");";
 
 
     public DBAdapter(@Nullable Context context) {
@@ -127,7 +128,7 @@ public class DBAdapter {
 
         public Cursor getCustomer(String customerLogin) throws SQLException{
             Cursor queryResult = db.query(true, CUSTOMER_TABLE, new String[]{CUSTOMER_NAME},
-                                               CUSTOMER_NAME+customerLogin, null, null,
+                                               CUSTOMER_NAME+" = '"+ customerLogin + "' ", null, null,
                                             null,null,null,null);
 
 
@@ -151,7 +152,7 @@ public class DBAdapter {
         //select a single order
         public Cursor getOrder(long orderID) throws SQLException{
             Cursor queryResult = db.query(true, ORDER_TABLE, new String[]{
-                    ORDER_ID_PK, ORDER_DATE}, ORDER_ID_PK+"="+orderID, null,
+                    ORDER_ID_PK, ORDER_DATE}, ORDER_ID_PK+" = "+orderID, null,
                     null,null,null,null,null);
 
 
@@ -160,7 +161,7 @@ public class DBAdapter {
 
         //delete single order
         public boolean deleteOrder(long orderID) {
-            return db.delete(ORDER_TABLE, ORDER_ID_PK + "=" + orderID, null) > 0;
+            return db.delete(ORDER_TABLE, ORDER_ID_PK + " = " + orderID, null) > 0;
         }
 
 
@@ -185,7 +186,7 @@ public class DBAdapter {
         //pizza info
         public Cursor getPizzaInfo(long pizzaID) throws SQLException {
             Cursor queryResult = db.query(true, PIZZA_TABLE, new String[]{PIZZA_SIZE, TOPPING_ONE,
-                            TOPPING_TWO, TOPPING_THREE}, PIZZA_ID_PK + "=" + pizzaID,
+                            TOPPING_TWO, TOPPING_THREE}, PIZZA_ID_PK + " = " + pizzaID,
                     null, null, null, null, null);
 
 
@@ -200,7 +201,7 @@ public class DBAdapter {
             newPizzaInfo.put(TOPPING_TWO, toppingTwo);
             newPizzaInfo.put(TOPPING_THREE, toppingThree);
 
-            return db.update(PIZZA_TABLE, newPizzaInfo, PIZZA_ID_PK + "=" + pizzaID, null) > 0;
+            return db.update(PIZZA_TABLE, newPizzaInfo, PIZZA_ID_PK + " = " + pizzaID, null) > 0;
         }
 
 

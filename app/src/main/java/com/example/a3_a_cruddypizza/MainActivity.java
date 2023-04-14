@@ -71,9 +71,7 @@ public class MainActivity extends BasicActivity {
 
         //attempt to load db file
         loadDB();
-
         dbAdapter = new DBAdapter(this);
-
 
 
         //update the gui based on preferences.
@@ -91,7 +89,6 @@ public class MainActivity extends BasicActivity {
                     break;
                 case R.id.loginButton:
                     validateLogin();
-                    startActivity(mainMenu);
                     break;
                 case R.id.createAccountButton:
                     startActivity(accountCreation);
@@ -125,6 +122,7 @@ public class MainActivity extends BasicActivity {
     public void validateLogin(){
         customer = new Customer("", "", "as");
 
+        //if customer object exists
         if (customer != null){
             dbAdapter.open();
             cursor = dbAdapter.getCustomer(customer.getLogin());
@@ -132,9 +130,11 @@ public class MainActivity extends BasicActivity {
                 dbAdapter.close();
                 startActivity(mainMenu);
             }
-
-            welcomeTextView.setText(preferences.isFrench() ? R.string.incorrectLoginFR
-                                                           : R.string.incorrectLoginEN);
+            else {
+                welcomeTextView.setText(preferences.isFrench() ? R.string.incorrectLoginFR
+                        : R.string.incorrectLoginEN);
+            }
+            dbAdapter.close();
         }
 
 
@@ -142,16 +142,6 @@ public class MainActivity extends BasicActivity {
             //if theres no customer object prompt them to make a account
             welcomeTextView.setText(preferences.isFrench() ? R.string.createAccountScreenTextFR
                                                            : R.string.createAccountScreenTextEN);
-        }
-        else if (!loginEditText.getText().toString().equals(customer.getLogin())){
-
-            //if the customer object has been created but the login is incorrect,
-            // prompt the user.
-            welcomeTextView.setText(preferences.isFrench() ? R.string.incorrectLoginFR
-                                                           : R.string.incorrectLoginEN);
-        }
-        else {
-
         }
 
 //        //this wil, be in the else in the future, here now for testing.
