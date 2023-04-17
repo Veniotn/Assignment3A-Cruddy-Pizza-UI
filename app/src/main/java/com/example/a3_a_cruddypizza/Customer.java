@@ -1,6 +1,7 @@
 package com.example.a3_a_cruddypizza;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -9,8 +10,9 @@ import java.util.ArrayList;
 public class Customer implements Serializable {
 
     private String firstName, lastName, login;
-    private int totalOrders;
+    private int totalOrders, customerID;
     private ArrayList<PizzaOrder> pizzaOrders;
+    private DBAdapter dbConnection;
 
     public Customer(String firstName, String lastName, String login) {
         this.firstName = firstName;
@@ -21,6 +23,7 @@ public class Customer implements Serializable {
     }
 
 
+    public int getCustomerID(){return customerID;}
     public String getFirstName() {
         return firstName;
     }
@@ -43,5 +46,9 @@ public class Customer implements Serializable {
 
     public ArrayList<PizzaOrder> getPizzaOrders() {
         return pizzaOrders;
+    }
+
+    public void setLogin(Cursor queryResult) {
+
     }
 }

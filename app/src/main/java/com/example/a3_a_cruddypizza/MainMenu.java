@@ -36,7 +36,7 @@ public class MainMenu extends BasicActivity {
         setContentView(R.layout.activity_main_menu);
 
         //setup activity
-        customer = getIntent().getSerializableExtra("Customer", Customer.class);
+        customer = getIntent().getSerializableExtra("customer", Customer.class);
 
         welcomeUserTextView = findViewById(R.id.welcomeUserTextView);
 

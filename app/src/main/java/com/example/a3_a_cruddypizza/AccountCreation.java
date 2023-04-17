@@ -1,5 +1,6 @@
 package com.example.a3_a_cruddypizza;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -57,12 +58,16 @@ public class AccountCreation extends BasicActivity {
         loginScreen = new Intent(getApplicationContext(), MainActivity.class);
         preferences = new SharedPreferenceHelper(this);
 
+        //connect db
+        dbConnection = new DBAdapter(this);
+
         updateLanguage();
     }
 
 
 
     public View.OnClickListener buttonClicked = new View.OnClickListener() {
+        @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -74,11 +79,10 @@ public class AccountCreation extends BasicActivity {
                     updateLanguage();
                     break;
                 case R.id.createAccountButton:
-                    loginScreen.putExtra("Customer", new Customer(
-                                       firstNameEditText.getText().toString(),
-                                       lastNameEditText.getText().toString(),
-                                       loginEditText.getText().toString()));
-                    startActivity(loginScreen);
+                    //if login is unique and customer has been inserted return to login.
+                    if(createAccount()){
+                        startActivity(loginScreen);
+                    }
                     break;
                 default:
                     break;
@@ -105,5 +109,44 @@ public class AccountCreation extends BasicActivity {
         lastNamePrompt.setText(textOptions.get(index.LAST_NAME_TEXT.ordinal()));
         loginPrompt.setText(textOptions.get(index.LOGIN_TEXT.ordinal()));
         createAccountButton.setText(textOptions.get(index.CREATE_ACCOUNT_BUTTON.ordinal()));
+    }
+
+
+    private boolean createAccount(){
+        String firstName, lastName, login, invalidLoginText;
+
+        //get prompt text according to preferences.
+        invalidLoginText = preferences.isFrench() ? getResources().getString(R.string.loginExistsFR)
+                                                  : getResources().getString(R.string.loginExistsEN);
+
+        //grab info from edit texts
+        firstName = firstNameEditText.getText().toString();
+        lastName  = lastNameEditText.getText().toString();
+        login     = loginEditText.getText().toString();
+
+        //check that the login is unique, if a result is returned the login is not unique.
+        dbConnection.open();
+        queryResult = dbConnection.getCustomer(login);
+        if (queryResult.moveToFirst()){
+            dbConnection.close();
+            headerText.setText(invalidLoginText);
+
+            return false;
+        }
+
+        dbConnection.close();
+        //attempt to insert customer into db, if greater than 0 insert was successful
+        dbConnection.open();
+        insertID = dbConnection.insertCustomer(firstName,lastName,login);
+        dbConnection.close();
+        if (insertID > 0){
+            //add customer to login screen and to the db
+            customer = new Customer(firstName,lastName,login);
+            loginScreen.putExtra("customer", customer);
+
+            return true;
+        }
+
+        return false;
     }
 }

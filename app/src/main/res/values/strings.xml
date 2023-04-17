@@ -14,6 +14,7 @@
     <string name="frenchLabel">Français</string>
     <string name="logoutTextEN">Logout</string>
     <string name="createAccountScreenTextEN">Create Account</string>
+    <string name="loginExistsEN">Login already taken</string>
     <string name="asteriskSymbolEN">*</string>
     <string name="firstNameCreateTextEN">First Name</string>
     <string name="lastNameCreateTextEN">Last Name</string>
@@ -44,6 +45,7 @@
     <string name="medAbreviationEN">MED</string>
     //end english values
     //french values
+
     <string name="createOrderTextFR">Créer une commande !</string>
     <string name="incorrectLoginFR">Créer une commande !</string>
     <string name="viewOrderTextFR">Voir l\'historique des commandes</string>
@@ -56,6 +58,7 @@
     <string name="englishLabel">English</string>
     <string name="logoutTextFR">Déconnexion</string>
     <string name="createAccountScreenTextFR">Créer un compte</string>
+    <string name="loginExistsFR">Nom d\'utilisateur déjà pris</string>
     <string name="asteriskSymbolFR">*</string>
     <string name="firstNameCreateTextFR">Prénom</string>
     <string name="lastNameCreateTextFR">Nom de famille</string>

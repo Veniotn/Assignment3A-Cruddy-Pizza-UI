@@ -20,7 +20,9 @@ import java.util.Arrays;
 
 abstract class BasicActivity extends AppCompatActivity {
     Customer customer;
-    Cursor cursor;
+    long insertID;
+    Cursor queryResult;
+    DBAdapter dbConnection;
     SharedPreferenceHelper preferences;
 
     //Since every activity has its own UI elements and arrays to draw from, we will make

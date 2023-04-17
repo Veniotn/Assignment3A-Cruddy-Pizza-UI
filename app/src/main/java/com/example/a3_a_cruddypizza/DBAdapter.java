@@ -58,13 +58,15 @@ public class DBAdapter {
     private SQLiteDatabase db;
 
     private Context context;
-    public static final int DB_VERSION = 3;
+    public static final int DB_VERSION = 4;
     public static final String DB_NAME = "CruddyPizza.db";
 
     //sql text variables;
     public static final String CUSTOMER_TABLE = "customers";
     public static final String CUSTOMER_ID_PK = "customer_id";
-    public static final String CUSTOMER_NAME  = "customer_name";
+    public static final String CUSTOMER_F_NAME  = "customer_f_name";
+    public static final String CUSTOMER_L_NAME  = "customer_l_name";
+    public static final String CUSTOMER_LOGIN  = "customer_login";
     public static final String ORDER_TABLE    = "orders";
     public static final String ORDER_ID_PK    = "id";
     public static final String ORDER_DATE     = "order_date";
@@ -79,7 +81,9 @@ public class DBAdapter {
     private static final String CUSTOMER_TABLE_CREATE =
             "CREATE TABLE " + CUSTOMER_TABLE +
             " (" + CUSTOMER_ID_PK + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                   CUSTOMER_NAME  + " TEXT);";
+                   CUSTOMER_F_NAME  + " TEXT, " +
+                   CUSTOMER_L_NAME + "  TEXT, " +
+                   CUSTOMER_LOGIN + "   TEXT NOT NULL);";
 
     private static final String ORDER_TABLE_CREATE =
             "CREATE TABLE " + ORDER_TABLE + " ("
@@ -119,16 +123,18 @@ public class DBAdapter {
 
 
         //insert a single customer
-        public long insertCustomer(String name) {
+        public long insertCustomer(String firstName, String lastName, String login) {
             ContentValues customerInfo = new ContentValues();
-            customerInfo.put(CUSTOMER_NAME, name);
+            customerInfo.put(CUSTOMER_F_NAME, firstName);
+            customerInfo.put(CUSTOMER_L_NAME, lastName);
+            customerInfo.put(CUSTOMER_LOGIN, login);
 
             return db.insert(CUSTOMER_TABLE, null, customerInfo);
         }
 
         public Cursor getCustomer(String customerLogin) throws SQLException{
-            Cursor queryResult = db.query(true, CUSTOMER_TABLE, new String[]{CUSTOMER_NAME},
-                                               CUSTOMER_NAME+" = '"+ customerLogin + "' ", null, null,
+            Cursor queryResult = db.query(true, CUSTOMER_TABLE, new String[]{CUSTOMER_ID_PK,CUSTOMER_F_NAME, CUSTOMER_L_NAME, CUSTOMER_LOGIN},
+                                               CUSTOMER_LOGIN+" = '"+ customerLogin + "' ", null, null,
                                             null,null,null,null);
 
 

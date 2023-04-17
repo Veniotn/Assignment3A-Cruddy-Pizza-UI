@@ -44,8 +44,16 @@ public class MainActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //give everything functionality
-        customer =  getIntent().getSerializableExtra("Customer", Customer.class);
+        //check for customer from DB
+
+        customer = getIntent().getSerializableExtra("customer", Customer.class);
+        if (customer != null){
+            dbConnection.open();
+            queryResult =  dbConnection.getCustomer(customer.getLogin());
+
+            customer.setLogin(queryResult);
+        }
+
 
         changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
         changeLanguageButton.setOnClickListener(buttonClicked);
@@ -120,33 +128,35 @@ public class MainActivity extends BasicActivity {
 
 
     public void validateLogin(){
-        customer = new Customer("", "", "as");
+        //check for customer from db
 
-        //if customer object exists
+
+        //if customer object exists check the login
         if (customer != null){
             dbAdapter.open();
-            cursor = dbAdapter.getCustomer(customer.getLogin());
-            if(cursor.moveToFirst()){
+            queryResult = dbAdapter.getCustomer(customer.getLogin());
+
+            if(queryResult.moveToFirst()){
+                //if a result is returned a login exists, login
                 dbAdapter.close();
+                //add customer to main menu
+                mainMenu.putExtra("customer", customer);
                 startActivity(mainMenu);
             }
             else {
+                //incorrect login.
                 welcomeTextView.setText(preferences.isFrench() ? R.string.incorrectLoginFR
                         : R.string.incorrectLoginEN);
             }
             dbAdapter.close();
+
+
         }
-
-
-        if (customer == null ){
+        else{
             //if theres no customer object prompt them to make a account
             welcomeTextView.setText(preferences.isFrench() ? R.string.createAccountScreenTextFR
                                                            : R.string.createAccountScreenTextEN);
         }
-
-//        //this wil, be in the else in the future, here now for testing.
-//        mainMenu.putExtra("Customer", customer);
-//        startActivity(mainMenu);
 
     }
 
