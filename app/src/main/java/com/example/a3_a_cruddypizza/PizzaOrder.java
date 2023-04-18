@@ -5,12 +5,12 @@ import java.time.LocalDate;
 
 public class PizzaOrder implements Serializable {
 
-    private   int     orderID;
-    private   LocalDate  orderDate;
-    private   Pizza   pizza;
+    private   final int     orderID;
+    private   final String  orderDate;
+    private   Pizza         pizza;
 
 
-    public PizzaOrder(LocalDate orderDate, int orderID, Pizza pizza) {
+    public PizzaOrder(String orderDate, int orderID, Pizza pizza) {
         this.orderDate = orderDate;
         this.orderID = orderID;
         this.pizza =  pizza;
@@ -22,7 +22,7 @@ public class PizzaOrder implements Serializable {
     }
 
 
-    public LocalDate getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 

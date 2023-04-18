@@ -1,6 +1,7 @@
 package com.example.a3_a_cruddypizza;
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.*;
@@ -58,7 +59,7 @@ public class DBAdapter {
     private SQLiteDatabase db;
 
     private Context context;
-    public static final int DB_VERSION = 4;
+    public static final int DB_VERSION = 5;
     public static final String DB_NAME = "CruddyPizza.db";
 
     //sql text variables;
@@ -88,9 +89,9 @@ public class DBAdapter {
     private static final String ORDER_TABLE_CREATE =
             "CREATE TABLE " + ORDER_TABLE + " ("
                  + ORDER_ID_PK    + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                   ORDER_DATE     + " TEXT NOT NULL, " +
-                   CUSTOMER_ID_PK + " INTEGER FOREIGN KEY REFERENCES customers( "+CUSTOMER_ID_PK+" ), " +
-                   PIZZA_ID_PK    + " INTEGER FOREIGN KEY REFERENCES pizza_info( "+PIZZA_ID_PK+" ) " +
+                   ORDER_DATE     + " TEXT," +
+                   CUSTOMER_ID_PK + " INTEGER REFERENCES customers( "+CUSTOMER_ID_PK+" ), " +
+                   PIZZA_ID_PK    + " INTEGER REFERENCES pizza_info( "+PIZZA_ID_PK+" ) " +
                     ");";
 
     private static final String PIZZA_INFO_TABLE_CREATE =
@@ -141,16 +142,27 @@ public class DBAdapter {
             return validCursor(queryResult);
         }
 
-        //delete a single customer
-        public boolean deleteCustomer(long customerID) {
-            //returns true if statement returns at least 1 row deleted
-            return db.delete(CUSTOMER_TABLE, CUSTOMER_ID_PK + "=" + customerID, null) > 0;
+        public Cursor getCustomerID(String customerLogin) throws SQLException{
+        Cursor queryResult = db.query(true, CUSTOMER_TABLE, new String[]{CUSTOMER_ID_PK},
+                                         CUSTOMER_LOGIN + " = '"+ customerLogin + "' ",
+                                   null, null, null, null, null,
+                                                                                   null);
+
+        return validCursor(queryResult);
         }
 
+        //delete a single customer
+//        public boolean deleteCustomer(long customerID) {
+//            //returns true if statement returns at least 1 row deleted
+//            return db.delete(CUSTOMER_TABLE, CUSTOMER_ID_PK + "=" + customerID, null) > 0;
+//        }
+
         //insert a single order
-        public long insertOrder(String orderDate) {
+        public long insertOrder(String orderDate, int customerID, long pizzaID) {
             ContentValues orderInfo = new ContentValues();
             orderInfo.put(ORDER_DATE, orderDate);
+            orderInfo.put(CUSTOMER_ID_PK, customerID);
+            orderInfo.put(PIZZA_ID_PK, (int)pizzaID);
 
             return db.insert(ORDER_TABLE, null, orderInfo);
         }
@@ -184,6 +196,18 @@ public class DBAdapter {
             return db.insert(PIZZA_TABLE, null, pizzaInfo);
         }
 
+        @SuppressLint("Range")
+        public int getPizzaID(int orderID){
+        Cursor queryResult = db.query(true, ORDER_TABLE, new String[]{PIZZA_ID_PK},
+                                           ORDER_ID_PK + " = " + orderID, null,
+                                     null,null, null, null);
+
+        if (queryResult.moveToFirst()){
+            return Integer.parseInt(queryResult.getString(queryResult.getColumnIndex(DBAdapter.PIZZA_ID_PK)));
+        }
+        return 0;
+        }
+
         //delete single pizza
         public boolean deletePizza(long pizzaID) {
             return db.delete(PIZZA_TABLE, PIZZA_ID_PK + "=" + pizzaID, null) > 0;
@@ -199,6 +223,7 @@ public class DBAdapter {
             return validCursor(queryResult);
         }
 
+
         public boolean
         updatePizza(int pizzaID, int pizzaSize, int toppingOne, int toppingTwo, int toppingThree) {
             ContentValues newPizzaInfo = new ContentValues();
@@ -212,7 +237,7 @@ public class DBAdapter {
 
 
         //retrieve all orders
-        public Cursor getAllOrders(long orderID) throws SQLException {
+        public Cursor getAllOrders(long customerID) throws SQLException {
 
             Cursor queryResult =
                     db.query(true, ORDER_TABLE + " JOIN " + PIZZA_TABLE + " ON " +
@@ -221,9 +246,12 @@ public class DBAdapter {
                                     ORDER_TABLE + "." + ORDER_ID_PK,
                                     ORDER_DATE,
                                     PIZZA_TABLE + "." + PIZZA_ID_PK,
-                                    PIZZA_SIZE
+                                    PIZZA_SIZE,
+                                    TOPPING_ONE,
+                                    TOPPING_TWO,
+                                    TOPPING_THREE
                             },
-                            ORDER_ID_PK + "=" + orderID, null, null, null,
+                            CUSTOMER_ID_PK + "=" + customerID, null, null, null,
                             null, null, null);
 
 

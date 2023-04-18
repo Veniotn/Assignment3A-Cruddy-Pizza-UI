@@ -24,7 +24,6 @@ public class ModifyOrder extends BasicActivity{
 
     private Pizza pizza;
 
-    private Pizza.PizzaUpdated pizzaUpdatedListener;
 
     private enum index{
         BACK_BUTTON,
@@ -42,10 +41,10 @@ public class ModifyOrder extends BasicActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_order);
 
-        pizza = getIntent().getSerializableExtra("pizza", Pizza.class);
+        dbConnection = new DBAdapter(this);
 
-        //setup update pizza listener which will allow us to reflect the changes made to the pizza.
-        pizzaUpdatedListener =  (Pizza.PizzaUpdated) getParent();
+        customer = getIntent().getSerializableExtra("customer", Customer.class);
+        pizza = getIntent().getSerializableExtra("pizza", Pizza.class);
 
         modifyOrderHeader = findViewById(R.id.editOrderHeaderText);
         sizePrompt        = findViewById(R.id.editSizePrompt);
@@ -87,10 +86,12 @@ public class ModifyOrder extends BasicActivity{
                     updateLanguage();
                     break;
                 case R.id.backButton:
+                    orderHistory.putExtra("customer", customer);
                     startActivity(orderHistory);
                     break;
                 case R.id.confirmEditButton:
                     modifyPizza();
+                    orderHistory.putExtra("customer", customer);
                     startActivity(orderHistory);
                     break;
                 default:
@@ -116,14 +117,15 @@ public class ModifyOrder extends BasicActivity{
         confirmButton.setText(textOptions.get(index.CONFIRM_TEXT.ordinal()));
 
 
-        //reuse the same routine for the spinner objects but add the resouces to the spinner
-        // adapter.
+        //reuse the same routine for the spinner objects but add the resources to the spinner
+        // adapter and use the pizza properties to set the spinners default selection.
         array = preferences.isFrench() ? getResources().getStringArray(R.array.sizeOptionsFrench)
                                        : getResources().getStringArray(R.array.sizeOptionsEnglish);
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
                                                   android.R.layout.simple_spinner_item, array);
         sizeSpinner.setAdapter(spinnerAdapter);
+        sizeSpinner.setSelection(pizza.getSize());
         spinnerAdapter.notifyDataSetChanged();
 
 
@@ -131,24 +133,39 @@ public class ModifyOrder extends BasicActivity{
                                        : getResources().getStringArray(R.array.toppingsEnglish);
         spinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, array);
+
         toppingOneSpinner.setAdapter(spinnerAdapter);
+        toppingOneSpinner.setSelection(pizza.getTopping1());
         toppingTwoSpinner.setAdapter(spinnerAdapter);
+        toppingTwoSpinner.setSelection(pizza.getTopping2());
         toppingThreeSpinner.setAdapter(spinnerAdapter);
+        toppingThreeSpinner.setSelection(pizza.getTopping3());
         //commit the changes and update the ui
         spinnerAdapter.notifyDataSetChanged();
 
     }
 
     public void modifyPizza(){
+        int id, size, top1, top2, top3;
+        //get values from spinners
+        id   = pizza.getID();
+        size = sizeSpinner.getSelectedItemPosition();
+        top1 = toppingOneSpinner.getSelectedItemPosition();
+        top2 = toppingTwoSpinner.getSelectedItemPosition();
+        top3 = toppingThreeSpinner.getSelectedItemPosition();
 
-        //update the properties of the pizza
-        pizza.setSize(sizeSpinner.getSelectedItem().toString());
-        pizza.setTopping1(toppingOneSpinner.getSelectedItem().toString());
-        pizza.setTopping2(toppingTwoSpinner.getSelectedItem().toString());
-        pizza.setTopping3(toppingThreeSpinner.getSelectedItem().toString());
-//        commit the changes to the old pizza(Will be a DB call in the future)
-        if (pizzaUpdatedListener != null){
-            pizzaUpdatedListener.updatePizza(pizza);
+        //update db and then update the pizza object
+        dbConnection.open();
+        if (dbConnection.updatePizza(id, size, top1,top2,top3)){
+            dbConnection.close();
+            pizza.setSize(size);
+            pizza.setTopping1(top1);
+            pizza.setTopping2(top2);
+            pizza.setTopping3(top3);
+
+            //return to the order history page
+            orderHistory.putExtra("pizza", pizza);
+            startActivity(orderHistory);
         }
     }
 

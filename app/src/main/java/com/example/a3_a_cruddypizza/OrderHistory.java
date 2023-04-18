@@ -9,12 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class OrderHistory extends BasicActivity implements RecyclerViewInterface, Pizza.PizzaUpdated {
+public class OrderHistory extends BasicActivity implements RecyclerViewInterface {
 
     private Button backButton, changeLanguageButton;
     private TextView headerText;
@@ -40,7 +38,9 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
 
-        customer = getIntent().getSerializableExtra("Customer", Customer.class);
+        dbConnection = new DBAdapter(this);
+
+        customer = getIntent().getSerializableExtra("customer", Customer.class);
 
         backButton = findViewById(R.id.backButton);
         changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
@@ -55,8 +55,6 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
 
         preferences = new SharedPreferenceHelper(this);
 
-
-
         orderHistory = findViewById(R.id.orderHistoryRecyclerView);
 
         fillOrderView();
@@ -66,6 +64,10 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
 
         orderHistory.setLayoutManager(manager);
         orderHistory.setAdapter(recyclerAdapter);
+
+
+
+
 
 
 
@@ -79,7 +81,7 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
 
             switch (v.getId()){
                 case R.id.backButton:
-                    mainMenu.putExtra("Customer", customer);
+                    mainMenu.putExtra("customer", customer);
                     startActivity(mainMenu);
                     break;
                 case R.id.orderHistoryChangeLanguageButton:
@@ -93,6 +95,12 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
 
     @Override
     public void orderClicked(int position) {
+        modifyOrder.putExtra("customer", customer);
+        //get the pizzas ID from db and set it on the pizza object
+        dbConnection.open();
+        orders.get(position).getPizza().setId( dbConnection.getPizzaID(orders.get(position)
+                                                                                    .getOrderID()));
+        dbConnection.close();
         modifyOrder.putExtra("pizza", orders.get(position).getPizza());
         startActivity(modifyOrder);
 
@@ -115,24 +123,30 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
 
     }
 
-    @Override
-    public void updatePizza(Pizza pizza) {
 
-        //find the index of the current pizza in the old list
-        int orderIndex = orders.indexOf(pizza);
-
-        //update the pizza;
-        orders.get(orderIndex).setPizza(pizza);
-
-    }
-
-
-
-
+    @SuppressLint("Range")
     private void fillOrderView(){
-        if (customer!=null){
-            orders = customer.getPizzaOrders();
+
+        //select all orders
+        dbConnection.open();
+        queryResult = dbConnection.getAllOrders(customer.getCustomerID());
+        dbConnection.close();
+
+        if (queryResult.moveToFirst()){
+            do {
+                orders.add(new PizzaOrder(
+                        queryResult.getString(queryResult.getColumnIndex(DBAdapter.ORDER_DATE)),
+                        queryResult.getInt(queryResult.getColumnIndex(DBAdapter.ORDER_ID_PK)),
+                        new Pizza(
+                                queryResult.getInt(queryResult.getColumnIndex(DBAdapter.PIZZA_SIZE)),
+                                queryResult.getInt(queryResult.getColumnIndex(DBAdapter.TOPPING_ONE)),
+                                queryResult.getInt(queryResult.getColumnIndex(DBAdapter.TOPPING_TWO)),
+                                queryResult.getInt(queryResult.getColumnIndex(DBAdapter.TOPPING_THREE))
+                        )
+                    ));//end order add
+            }while (queryResult.moveToNext());
         }
+
 
         //all issues will be fixed when adding DB
         //set listeners on all pizza orders

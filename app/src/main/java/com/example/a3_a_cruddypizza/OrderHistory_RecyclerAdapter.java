@@ -88,25 +88,23 @@ private final RecyclerViewInterface recyclerViewInterface;
 
     @Override
     public void onBindViewHolder(@NonNull OrderHistory_RecyclerAdapter.MyViewHolder holder, int position) {
-        String [] array;
-        ArrayList<String> textOptions;
-        if (preferences.isFrench()){
-            array =  context.getResources().getStringArray(R.array.orderDetailsFR);
-            textOptions = new ArrayList<>(Arrays.asList(array));
-        }
-        else {
-            array = context.getResources().getStringArray(R.array.orderDetailsEN);
-            textOptions = new ArrayList<>(Arrays.asList(array));
-        }
+        String [] array = preferences.isFrench() ? context.getResources().getStringArray(R.array.orderDetailsFR)
+                                                 : context.getResources().getStringArray(R.array.orderDetailsEN);
+        ArrayList<String> textOptions = new ArrayList<>(Arrays.asList(array));
 
 
-        //Assign values to the view we created in the recycler view row layout file
+        //Fill recycler card
         holder.orderIDPrompt.setText(textOptions.get(index.ORDER_ID_PROMPT.ordinal()));
         holder.orderIDText.setText(String.valueOf(orders.get(position).getOrderID()));
-        holder.sizePrompt.setText(textOptions.get(index.SIZE_PROMPT.ordinal()));
-        holder.sizeText.setText(orders.get(position).getPizza().getSize());
+        holder.sizePrompt.setText(textOptions.get(orders.get(position).getPizza().getSize()));
         holder.orderDatePrompt.setText(textOptions.get(index.ORDER_DATE_PROMPT.ordinal()));
-        holder.orderDate.setText(orders.get(position).getOrderDate().toString());
+        holder.orderDate.setText(orders.get(position).getOrderDate());
+
+       //get pizza size
+        array = preferences.isFrench() ? context.getResources().getStringArray(R.array.sizeOptionsFrench)
+                                       : context.getResources().getStringArray(R.array.sizeOptionsEnglish);
+        textOptions = new ArrayList<>(Arrays.asList(array));
+        holder.sizeText.setText(textOptions.get(orders.get(position).getPizza().getSize()));
 
     }
 

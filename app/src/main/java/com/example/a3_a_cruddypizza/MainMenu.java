@@ -16,7 +16,7 @@ public class MainMenu extends BasicActivity {
 
     private TextView welcomeUserTextView;
 
-    private Intent orderCreation, orderHistory, startScreen;
+    private Intent orderCreation, orderHistory, loginScreen;
 
     private enum index{
         CHANGE_LANGUAGE_BUTTON,
@@ -40,7 +40,7 @@ public class MainMenu extends BasicActivity {
 
         welcomeUserTextView = findViewById(R.id.welcomeUserTextView);
 
-        changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
+        changeLanguageButton = findViewById(R.id.mainMenuChangeLanguageButton);
         changeLanguageButton.setOnClickListener(buttonClicked);
         createOrderButton = findViewById(R.id.createOrderButton);
         createOrderButton.setOnClickListener(buttonClicked);
@@ -52,7 +52,7 @@ public class MainMenu extends BasicActivity {
 
         orderCreation = new Intent(getApplicationContext(), OrderCreation.class);
         orderHistory  = new Intent(getApplicationContext(), OrderHistory.class);
-        startScreen   = new Intent(getApplicationContext(), MainActivity.class);
+        loginScreen   = new Intent(getApplicationContext(), MainActivity.class);
 
         preferences = new SharedPreferenceHelper(this);
 
@@ -67,20 +67,20 @@ public class MainMenu extends BasicActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.createOrderButton:
-                    orderCreation.putExtra("Customer", customer);
+                    orderCreation.putExtra("customer", customer);
                     startActivity(orderCreation);
                     break;
                 case R.id.viewOrderHistoryButton:
-                    orderHistory.putExtra("Customer", customer);
+                    orderHistory.putExtra("customer", customer);
                     startActivity(orderHistory);
                     break;
-                case R.id.orderHistoryChangeLanguageButton:
+                case R.id.mainMenuChangeLanguageButton:
                     preferences.onUpdate();
                     updateLanguage();
                     break;
                 case R.id.logoutButton:
-                    startScreen.putExtra("Customer", customer);
-                    startActivity(startScreen);
+                    loginScreen.putExtra("customer", customer);
+                    startActivity(loginScreen);
                 default:
                     break;
 

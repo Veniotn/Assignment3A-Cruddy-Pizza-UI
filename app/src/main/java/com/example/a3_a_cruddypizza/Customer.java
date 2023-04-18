@@ -22,8 +22,19 @@ public class Customer implements Serializable {
         this.pizzaOrders = new ArrayList<PizzaOrder>();
     }
 
+    public Customer(String login){
+        this.firstName = login;
+        this.lastName = login;
+        this.login   = login;
+        this.totalOrders = 0;
+        this.pizzaOrders = new ArrayList<PizzaOrder>();
+    }
+
 
     public int getCustomerID(){return customerID;}
+    public void setCustomerID(int customerID){
+        this.customerID = customerID;
+    }
     public String getFirstName() {
         return firstName;
     }

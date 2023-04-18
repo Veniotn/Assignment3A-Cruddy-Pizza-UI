@@ -8,9 +8,13 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class OrderCreation extends BasicActivity {
 
@@ -40,7 +44,7 @@ public class OrderCreation extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_creation);
 
-        customer = getIntent().getSerializableExtra("Customer", Customer.class);
+        customer = getIntent().getSerializableExtra("customer", Customer.class);
 
         headerText         = findViewById(R.id.orderCreationTopTextView);
         selectSizePrompt   = findViewById(R.id.sizePromptTextView);
@@ -69,7 +73,8 @@ public class OrderCreation extends BasicActivity {
         orderConfirmationScreen = new Intent(getApplicationContext(), OrderConfirmation.class);
         mainMenu                = new Intent(getApplicationContext(), MainMenu.class);
 
-        LocalDate currentDate = LocalDate.now();
+        dbConnection = new DBAdapter(this);
+
 
 
         updateLanguage();
@@ -85,7 +90,7 @@ public class OrderCreation extends BasicActivity {
                     updateLanguage();
                     break;
                 case R.id.backButton:
-                    mainMenu.putExtra("Customer", customer);
+                    mainMenu.putExtra("customer", customer);
                     startActivity(mainMenu);
                     break;
                 case R.id.confirmOrderButton:
@@ -134,21 +139,48 @@ public class OrderCreation extends BasicActivity {
     }
 
     public void addOrder(){
+        //get their index in the spinner arrays
+        int size, top1, top2, top3;
 
-        String size, top1, top2, top3;
+        size = sizeSpinner.getSelectedItemPosition();
+        top1 = toppingOneSpinner.getSelectedItemPosition();
+        top2 = toppingTwoSpinner.getSelectedItemPosition();
+        top3 = toppingThreeSpinner.getSelectedItemPosition();
 
-        size = sizeSpinner.getSelectedItem().toString();
-        top1 = toppingOneSpinner.getSelectedItem().toString();
-        top2 = toppingTwoSpinner.getSelectedItem().toString();
-        top3 = toppingThreeSpinner.getSelectedItem().toString();
+        dbConnection.open();
+        //attempt to insert pizza into db
+        insertID = dbConnection.insertPizza(size, top1, top2, top3);
+        dbConnection.close();
+
+        if (insertID <= 0){
+            //insertion failed
+            headerText.setText(R.string.confirmOrderTextFR);
+        }
+
+        //get current date
+        Date currentDate = new Date();
+        DateFormat dateFormat = DateFormat.getDateInstance();
+        //convert to string
+        String orderDate = dateFormat.format(currentDate);
+
+        //attempt to insert order into order table
+        dbConnection.open();
+        insertID = dbConnection.insertOrder(orderDate, customer.getCustomerID(), insertID);
+        dbConnection.close();
+        if (insertID <= 0){
+            //error
+            headerText.setText(R.string.confirmOrderTextEN);
+        }
+        //get the pizzaID
+
 
         //create a new pizza order and add it to the customers order list
         // then pass the pizza to the order confirmation screen.
-        customer.getPizzaOrders().add(new PizzaOrder(LocalDate.now(), customer.getTotalOrders(),
+        customer.getPizzaOrders().add(new PizzaOrder(orderDate, (int)insertID,
                                       new Pizza(size, top1, top2, top3)));
         PizzaOrder pizzaOrder = customer.getPizzaOrders().get(customer.getTotalOrders());
         orderConfirmationScreen.putExtra("pizzaOrder", pizzaOrder);
-        orderConfirmationScreen.putExtra("Customer", customer);
+        orderConfirmationScreen.putExtra("customer", customer);
 
         //add one to the customers total orders.
         customer.addOrder();

@@ -1,4 +1,5 @@
 package com.example.a3_a_cruddypizza;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,7 +24,6 @@ public class MainActivity extends BasicActivity {
     private Button loginButton, createAccountButton, changeLanguageButton;
     private TextView welcomeTextView, copyrightTextView;
     private EditText loginEditText;
-    private DBAdapter dbAdapter;
 
     //activities
     private Intent mainMenu, accountCreation;
@@ -44,15 +44,10 @@ public class MainActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //check for customer from DB
-
+        //check for customer from client-side
         customer = getIntent().getSerializableExtra("customer", Customer.class);
-        if (customer != null){
-            dbConnection.open();
-            queryResult =  dbConnection.getCustomer(customer.getLogin());
 
-            customer.setLogin(queryResult);
-        }
+
 
 
         changeLanguageButton = findViewById(R.id.orderHistoryChangeLanguageButton);
@@ -79,7 +74,7 @@ public class MainActivity extends BasicActivity {
 
         //attempt to load db file
         loadDB();
-        dbAdapter = new DBAdapter(this);
+        dbConnection = new DBAdapter(this);
 
 
         //update the gui based on preferences.
@@ -127,37 +122,37 @@ public class MainActivity extends BasicActivity {
     }
 
 
+    //the query is checking for a valid response before calling on the index so it will be there
+    @SuppressLint("Range")
     public void validateLogin(){
-        //check for customer from db
+        //check db for customer
+        dbConnection.open();
+        queryResult = dbConnection.getCustomer(loginEditText.getText().toString());
+        dbConnection.close();
 
-
-        //if customer object exists check the login
-        if (customer != null){
-            dbAdapter.open();
-            queryResult = dbAdapter.getCustomer(customer.getLogin());
-
-            if(queryResult.moveToFirst()){
-                //if a result is returned a login exists, login
-                dbAdapter.close();
-                //add customer to main menu
-                mainMenu.putExtra("customer", customer);
-                startActivity(mainMenu);
+        if (queryResult.moveToFirst()){
+            //if login is correct continue
+            if (customer == null){
+                //if customer object hasn't been passed from create account create one
+                customer = new Customer(queryResult.getString(queryResult.getColumnIndex(DBAdapter.CUSTOMER_LOGIN)));
             }
-            else {
-                //incorrect login.
-                welcomeTextView.setText(preferences.isFrench() ? R.string.incorrectLoginFR
-                        : R.string.incorrectLoginEN);
-            }
-            dbAdapter.close();
 
+            //set customerID
+            dbConnection.open();
+            queryResult = dbConnection.getCustomerID(customer.getLogin());
+            dbConnection.close();
+            //get the customerID column value as an integer.
+            int customerID = Integer.parseInt(queryResult.getString(queryResult.getColumnIndex(DBAdapter.CUSTOMER_ID_PK)));
+            customer.setCustomerID(customerID);
 
+            mainMenu.putExtra("customer", customer);
+            startActivity(mainMenu);
         }
-        else{
-            //if theres no customer object prompt them to make a account
-            welcomeTextView.setText(preferences.isFrench() ? R.string.createAccountScreenTextFR
-                                                           : R.string.createAccountScreenTextEN);
+        else {
+            //incorrect login.
+            welcomeTextView.setText(preferences.isFrench() ? R.string.incorrectLoginFR
+                    : R.string.incorrectLoginEN);
         }
-
     }
 
 
@@ -170,7 +165,7 @@ public class MainActivity extends BasicActivity {
 
             //if app doesn't already have the db file, open it and write it to the dest path
             if (!dbFile.exists()){
-                copyDB(getAssets().open(DBAdapter.DB_NAME), new FileOutputStream(destPath));
+                copyDB(getAssets().open(dbConnection.DB_NAME), new FileOutputStream(destPath));
             }
         }catch (FileNotFoundException e) {
             e.printStackTrace();
