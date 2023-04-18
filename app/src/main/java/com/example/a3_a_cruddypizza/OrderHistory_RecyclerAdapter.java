@@ -6,13 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 //https://www.youtube.com/watch?v=Mc0XT58A1Z4 Recycler view tutorial
 public class OrderHistory_RecyclerAdapter extends RecyclerView.Adapter<OrderHistory_RecyclerAdapter.MyViewHolder> implements Serializable {
@@ -20,6 +23,9 @@ private final RecyclerViewInterface recyclerViewInterface;
 
     private Context context;
     private SharedPreferenceHelper preferences;
+    private DBAdapter dbConnection;
+    private RecyclerView recyclerView;
+    ItemTouchHelper swipeToDelete;
 
     private ArrayList<PizzaOrder> orders;
 
@@ -31,11 +37,17 @@ private final RecyclerViewInterface recyclerViewInterface;
 
 
 
-    public OrderHistory_RecyclerAdapter(ArrayList<PizzaOrder> orders, Context context,
+    public OrderHistory_RecyclerAdapter(RecyclerView recyclerView, ArrayList<PizzaOrder> orders, Context context,
                                         RecyclerViewInterface recyclerViewInterface){
         this.context = context;
         this.orders = orders;
         this.recyclerViewInterface = recyclerViewInterface;
+        this.dbConnection = new DBAdapter(context);
+        this.recyclerView = recyclerView;
+
+        //set the swipe listener
+        swipeToDelete = new ItemTouchHelper(new SwipeToDelete(dbConnection, this));
+        swipeToDelete.attachToRecyclerView(this.recyclerView);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements Serializable {
@@ -53,7 +65,7 @@ private final RecyclerViewInterface recyclerViewInterface;
             sizeText             = itemView.findViewById(R.id.pizzaSizeText);
             orderDatePrompt      = itemView.findViewById(R.id.orderDatePrompt);
             orderDate            = itemView.findViewById(R.id.orderDateText);
-            changeLanguageButton =  itemView.findViewById(R.id.orderHistoryChangeLanguageButton);
+            changeLanguageButton = itemView.findViewById(R.id.orderHistoryChangeLanguageButton);
 
             //responds when user presses on order
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +108,7 @@ private final RecyclerViewInterface recyclerViewInterface;
         //Fill recycler card
         holder.orderIDPrompt.setText(textOptions.get(index.ORDER_ID_PROMPT.ordinal()));
         holder.orderIDText.setText(String.valueOf(orders.get(position).getOrderID()));
-        holder.sizePrompt.setText(textOptions.get(orders.get(position).getPizza().getSize()));
+        holder.sizePrompt.setText(textOptions.get(index.SIZE_PROMPT.ordinal()));
         holder.orderDatePrompt.setText(textOptions.get(index.ORDER_DATE_PROMPT.ordinal()));
         holder.orderDate.setText(orders.get(position).getOrderDate());
 
@@ -111,6 +123,21 @@ private final RecyclerViewInterface recyclerViewInterface;
     @Override
     public int getItemCount() {
         return orders.size();
+    }
+
+    public void onItemSwipe(int position){
+        dbConnection.open();
+        if (dbConnection.deleteOrder(orders.get(position).getOrderID())) {
+            dbConnection.close();
+            //if card position is not null alter and update the view.
+            Objects.requireNonNull(recyclerView.getAdapter()).notifyItemRemoved(position);
+            Toast.makeText(context.getApplicationContext(), preferences.isFrench() ?
+                           R.string.orderDeletedFR : R.string.orderDeletedEN, Toast.LENGTH_SHORT).show();
+        }
+
+        dbConnection.close();
+
+
     }
 
 

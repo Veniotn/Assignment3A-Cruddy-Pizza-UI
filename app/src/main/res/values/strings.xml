@@ -32,6 +32,7 @@
     <string name="baconTextEN">Bacon</string>
     <string name="tomatoTextEN">Cherry Tomatoes</string>
     <string name="confirmOrderTextEN">CONFIRM ORDER</string>
+    <string name="orderDeletedEN">Order deleted.</string>
     <string name="backTextEN">Back</string>
     <string name="orderConfirmedTextEN">Order Confirmed!</string>
     <string name="orderIdPromptTextEN">Order ID:</string>
@@ -76,6 +77,7 @@
     <string name="baconTextFR">Bacon</string>
     <string name="tomatoTextFR">Tomates cerises</string>
     <string name="confirmOrderTextFR">CONFIRMER LA COMMANDE</string>
+    <string name="orderDeletedFR">Commande supprimée.</string>
     <string name="backTextFR">Retour</string>
     <string name="orderConfirmedTextFR">Commande confirmée !</string>
     <string name="orderIdPromptTextFR">ID de commande :</string>

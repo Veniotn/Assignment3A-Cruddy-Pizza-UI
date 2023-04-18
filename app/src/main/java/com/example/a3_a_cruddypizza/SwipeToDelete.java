@@ -5,9 +5,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SwipeToDelete extends ItemTouchHelper.Callback {
     private final DBAdapter dbAdapter;
+    private final OrderHistory_RecyclerAdapter recyclerAdapter;
 
-    public SwipeToDelete(DBAdapter dbAdapter){
+    public SwipeToDelete(DBAdapter dbAdapter, OrderHistory_RecyclerAdapter recyclerAdapter){
         this.dbAdapter = dbAdapter;
+        this.recyclerAdapter = recyclerAdapter;
     }
 
     @Override
@@ -23,9 +25,8 @@ public class SwipeToDelete extends ItemTouchHelper.Callback {
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        int position = viewHolder.getAdapterPosition();
-
-        dbAdapter.deleteOrder(position);
+        //call the swipe method in the recycler adapter to delete the order
+       recyclerAdapter.onItemSwipe(viewHolder.getAdapterPosition());
     }
 
 }

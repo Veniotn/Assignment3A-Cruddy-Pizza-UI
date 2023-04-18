@@ -208,21 +208,6 @@ public class DBAdapter {
         return 0;
         }
 
-        //delete single pizza
-        public boolean deletePizza(long pizzaID) {
-            return db.delete(PIZZA_TABLE, PIZZA_ID_PK + "=" + pizzaID, null) > 0;
-        }
-
-        //pizza info
-        public Cursor getPizzaInfo(long pizzaID) throws SQLException {
-            Cursor queryResult = db.query(true, PIZZA_TABLE, new String[]{PIZZA_SIZE, TOPPING_ONE,
-                            TOPPING_TWO, TOPPING_THREE}, PIZZA_ID_PK + " = " + pizzaID,
-                    null, null, null, null, null);
-
-
-            return validCursor(queryResult);
-        }
-
 
         public boolean
         updatePizza(int pizzaID, int pizzaSize, int toppingOne, int toppingTwo, int toppingThree) {
@@ -251,9 +236,8 @@ public class DBAdapter {
                                     TOPPING_TWO,
                                     TOPPING_THREE
                             },
-                            CUSTOMER_ID_PK + "=" + customerID, null, null, null,
-                            null, null, null);
-
+                            CUSTOMER_ID_PK + "=" + customerID, null, null,
+                            null, null, null, null);
 
 
             //return orders

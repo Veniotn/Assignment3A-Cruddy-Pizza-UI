@@ -59,7 +59,7 @@ public class OrderHistory extends BasicActivity implements RecyclerViewInterface
 
         fillOrderView();
 
-        recyclerAdapter = new OrderHistory_RecyclerAdapter(orders, this, this);
+        recyclerAdapter = new OrderHistory_RecyclerAdapter(orderHistory, orders, this, this);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
 
         orderHistory.setLayoutManager(manager);
